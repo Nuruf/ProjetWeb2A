@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulaire</title>
+    <link rel="stylesheet" href="user.css">
+    <script src="validateForm.js"></script>
+    
+</head>
+<body>
+    <h1>RECLAMATION</h1>
+    <form action="../backoffice/addreclamation.php" method="post" onsubmit="return validateForm(event)"id="reclamationForm">
+        <label for="user_id">ID utilisateur :</label>
+        <input type="text" id="user_id" name="user_id" required>
+        <br><br>
+        
+        <label for="description">Description :</label><br>
+        <textarea id="description" name="description" rows="4" cols="50" placeholder="Entrez la description ici..." required></textarea>
+        <br><br>
+        
+        <button type="submit">Envoyer</button>
+    </form>
+</body>
+</html>

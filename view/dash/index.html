@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skill Swap</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="logo">Skill Swap</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#staff">Our Staff</a></li>
+                <li><a href="#news">News</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#reclamation" onclick="showSection('reclamation')">RECLAMATION</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="auth-buttons">
+                <a href="#" class="login">Log in</a>
+                <a href="#" class="join">Join</a>
+            </div>
+        </nav>
+
+        <!-- Sliding background images -->
+        <div class="background-slider">
+            <div class="background-slide active" style="background-image: url('assets/ai.jpg');"></div>
+            <div class="background-slide" style="background-image: url('assets/hands.jpg');"></div>
+        </div>
+
+        <div class="hero-content">
+            <h1>Skills Are the Seeds of Growth</h1>
+            <p>Join a community dedicated to learning and sharing knowledge.</p>
+            <a href="#about" class="cta-button">Discover Skills</a>
+        </div>
+    </header>
+
+    <!-- About Us Section -->
+    <section id="about" class="about">
+        <div class="about-text">
+            <h2>Skill swap</h2>
+            <p>Skill Swap is a community where individuals can come together to learn, share, and grow their skills through collaboration and knowledge exchange. We focus on creating meaningful connections through skill-sharing opportunities.</p>
+        </div>
+        <div class="about-image">
+            <img src="meet.avif" alt="About Us Image">
+        </div>
+    </section>
+
+    <!-- Our Staff Section -->
+    <section id="staff" class="staff">
+        <h2>Our Members</h2>
+        <div class="member-container">
+            <div class="member">
+                <img src="ai.jpg" alt="Member 1">
+                <h3>John Doe</h3>
+                <p>Founder of Skill Swap. Passionate about knowledge sharing.</p>
+            </div>
+            <div class="member">
+                <img src="member2.jpg" alt="Member 2">
+                <h3>Jane Smith</h3>
+                <p>Co-founder and community manager, dedicated to helping members connect.</p>
+            </div>
+        </div>
+        <div class="member-container">
+            <div class="member">
+                <img src="member3.jpg" alt="Member 3">
+                <h3>Sam Wilson</h3>
+                <p>Creative Director. Focused on crafting engaging content for our members.</p>
+            </div>
+            <div class="member">
+                <img src="member4.jpg" alt="Member 4">
+                <h3>Emily Turner</h3>
+                <p>Lead Developer. Ensures the platform runs smoothly for all users.</p>
+            </div>
+        </div>
+        <div class="member-container">
+            <div class="member">
+                <img src="member5.jpg" alt="Member 5">
+                <h3>Michael Brown</h3>
+                <p>Marketing Head. Spreading the word about Skill Swap and reaching new members.</p>
+            </div>
+            <div class="member">
+                <img src="member6.jpg" alt="Member 6">
+                <h3>Sarah Lee</h3>
+                <p>Customer Support Manager. Always ready to assist with any platform inquiries.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Help Center Section -->
+
+    <div class="reclamation">
+        <iframe src="user.html" frameborder="0"></iframe>
+    </div>
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2024 Skill Swap. All rights reserved.</p>
+    </footer>
+
+    <script src="function.js"></script>
+</body>
+</html>
