@@ -80,7 +80,10 @@ class QuizController{
                 'description1'=> $quiz->getDescription()
                 
                 
-            ]);
+            ]);?>
+            <script>
+            alert("Le quiz a ete modifier avec succes ");
+            </script><?php
            }catch(Exception $e){
             die('Error:'.$e->getMessage());
         }
