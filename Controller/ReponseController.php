@@ -85,6 +85,37 @@ class ReponsesController{
         }
     }
 
+    
+
+    function updatereponse($reponse,$id)
+    {
+        try{
+            $db=config::getconnexion();
+            $query=$db->prepare(
+            'UPDATE reponses SET
+            question_text=:question_text,
+            points=:points
+            WHERE id_question=:id'
+            );
+            $query->execute([
+                'id' => $id,
+                'question_text'=>$question->getquestion(),
+                ' points'=>$question->getPoints()
+                
+                
+            ]);
+           }catch(Exception $e){
+            die('Error:'.$e->getMessage());
+        }
+
+
+        }
+
+
+    }
+
+
+
 
 
 
