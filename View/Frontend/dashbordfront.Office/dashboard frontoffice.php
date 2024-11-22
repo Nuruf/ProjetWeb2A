@@ -25,12 +25,17 @@
             </ul>
         </nav>
     </aside>
+    <?php
 
+$user = isset($_GET['name']) ? htmlspecialchars($_GET['name']) : "Utilisateur inconnu";
+?>
     <!-- Contenu principal -->
     <main class="main-content">
         <header class="user-info">
-            <span>Bienvenue, <b>username</b></span>
-            <button class="logout-btn"><i class="fas fa-sign-out-alt"></i> Déconnexion</button>
+            <span>Bienvenue     ,<?= $user; ?>  </span>
+           <a href="http://localhost/projet%20web/View/Frontend/First_Interface/login&signUp/login.php">
+             <button class="logout-btn"><i class="fas fa-sign-out-alt"> </i> Déconnexion</button>
+        </a>
         </header>
 
         <div class="content">

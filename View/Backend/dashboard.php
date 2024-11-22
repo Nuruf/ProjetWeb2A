@@ -8,15 +8,19 @@
     
 </head>
 <body>
+<?php
+// Récupérer le nom d'utilisateur à partir de l'URL
+$user = isset($_GET['name']) ? htmlspecialchars($_GET['name']) : "Utilisateur inconnu";
+?>
 
-
-    
-    <div class="user-info">
-        <img src="logoo.png" alt="User Profile">
-       
-        <span>bienvenue sur notre site  : </span>
-        <h1>dashboard</h1>
-    </div>
+<div class="user-info">
+    <img src="logoo.png" alt="User Profile">
+    <span>Bienvenue sur notre site :<?= $user; ?> </span>
+    <h1>Dashboard</h1>
+    <a href=" http://localhost/projet%20web/View/Frontend/First_Interface/login&signUp/login.php ">
+    <button type="submit" class="logout-btn" name="logout">Se déconnecter</button>
+    </a>
+</div>
 
      <nav>
         <ul>
@@ -119,6 +123,7 @@ $list = $utilisateursController->listUser();
             <p class="section-description">Submit any issues or complaints to the admin. We are here to help resolve any problems.</p>
         </div>
     </div>
+
 
     <script>
         // Function to show the selected section and hide others

@@ -14,16 +14,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['email'], $_GET['passwor
         if ($user['Role'] == 0) {
             // Rediriger vers le tableau de bord admin
             echo "<script>alert('connexion réussi page admin.');</script>";
-            header('Location: /PROJET%20WEB/View/Backend/dashboard.php#profile?name=' . urlencode($user['Utilisateur']));
+            header('Location: /PROJET%20WEB/View/Backend/dashboard.php?name=' . urlencode($user['Utilisateur']) .'#profile' );
             exit;
         } elseif ($user['Role'] == 1) {
             // Rediriger vers le tableau de bord utilisateur
             echo "<script>alert('correction reussi .');</script>";
-            header('Location: ../../dashbordfront.Office/dashboard frontoffice.php');
+            header('Location: ../../dashbordfront.Office/dashboard frontoffice.php?name=' . urlencode($user['Utilisateur']) .'#profile');
             exit;
         }
     } else {
-        // Afficher un message d'erreur si l'utilisateur ou le mot de passe est incorrect
+
         echo "<script>alert('Email ou mot de passe incorrect.');</script>";
     }
 }
@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['email'], $_GET['passwor
             </div>
             <button type="submit" class="login-btn">Connexion</button>
             <div class="extra-options">
-                <a href="#">Mot de passe oublié ?</a>
+                <a href=" MotdePasse.php  ">Mot de passe oublié ?</a>
                 <a href="SignUp.php">Créer un compte</a>
             </div>
         </form>
