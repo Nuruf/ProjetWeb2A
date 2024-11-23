@@ -21,15 +21,15 @@ class ReponsesController{
 
 
     
-    public function updateReponse($reponse) {
-        $sql = "UPDATE reponses SET answer_text = :answerText, is_correct = :isCorrect WHERE id = :reponseId";
+    public function updateReponse($reponse, $id) {
+        $sql = "UPDATE reponses SET reponse_text = :reponse_text, is_correct = :is_correct WHERE id_reponse = :reponseId";
        $db=config::getconnexion();
        try{
         $query=$db->prepare($sql);
         $query->execute([
-            'answerText' => $answerText,
-            'isCorrect' => $isCorrect,
-            'reponseId' => $reponseId,
+            'reponse_text'=> $reponse->getreponse(),
+            'is_correct'=> $reponse->getcorrect(),
+            'reponseId'=>$id
         ]);
        }catch(Exception $e){
         die('Error:'.$e->getMessage());
@@ -85,7 +85,16 @@ class ReponsesController{
         }
     }
 
-    
+    public function getCorrectAnswer($question_id) {
+        // Préparer la requête pour récupérer la réponse correcte
+        $sql = "SELECT id_reponse FROM reponses WHERE id_question =? AND is_correct = 1"; // `est_correct` est une colonne dans votre base de données
+        $db=config::getConnexion();
+        $req = $db->prepare($sql);
+        $req->bindValue(1, $question_id, PDO::PARAM_INT);
+        $req->execute();
+        return $req->fetch(PDO::FETCH_ASSOC);
+        
+    }
 
   
 

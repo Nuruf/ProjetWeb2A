@@ -69,7 +69,7 @@ class QuestionController{
                 $query->execute([
                     'id' => $id,
                     'question_text'=>$question->getquestion(),
-                    ' points'=>$question->getPoints()
+                    'points'=>$question->getPoints()
                     
                     
                 ]);
@@ -81,6 +81,22 @@ class QuestionController{
             }
     
     
+
+
+            function showQuestion($id)
+            {
+                $sql = "SELECT * from question where id_question = $id";
+                $db = config::getConnexion();
+                try {
+                    $query = $db->prepare($sql);
+                    $query->execute();
+        
+                    $quiz = $query->fetch();
+                    return $quiz;
+                } catch (Exception $e) {
+                    die('Error: ' . $e->getMessage());
+                }
+            }
         }
     
 
