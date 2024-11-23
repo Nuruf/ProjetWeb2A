@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categories</title>
+</head>
+<body>
+    <h1>All Categories</h1>
+    <?php foreach ($categories as $category): ?>
+        <div>
+            <h2><?php echo htmlspecialchars($category['nomCat']); ?></h2>
+            <p><?php echo htmlspecialchars($category['descriptionCat']); ?></p>
+            <!-- Updated image path -->
+            <img src="<?php echo htmlspecialchars($category['imageCat']); ?>.jpg" 
+                 alt="Image of <?php echo htmlspecialchars($category['nomCat']); ?>" 
+                 style="width: 200px;">
+        </div>
+    <?php endforeach; ?>
+</body>
+</html>
