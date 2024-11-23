@@ -1,9 +1,7 @@
 <?php
-echo "Looking for config.php in: " . __DIR__ . "/config.php";
-require_once 'categories.php';
-
-$categoryModel = new Categories();
-$categories = $categoryModel->getAllCategories(); // Fetch all categories
+include '../../controller/CategoryController.php';
+$categoriesController = new categoriesController();
+$list = $categoriesController->listCategories();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,7 +26,7 @@ $categories = $categoryModel->getAllCategories(); // Fetch all categories
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($categories as $category): ?>
+            <?php foreach ($list as $category): ?>
                 <tr>
                     <td><?php echo htmlspecialchars($category['idCat']); ?></td>
                     <td><?php echo htmlspecialchars($category['nomCat']); ?></td>

@@ -1,11 +1,11 @@
 <?php
 class contenu{
- private int $idContenu;
- private string $descriptionContenu;
- private string $nomContenu;
+ private ?int $idContenu;
+ private ?string $descriptionContenu;
+ private ?string $nomContenu;
  //private string $idCat;
 
- public function __construct($idContenu,$nomContenu,$descriptionContenu,$idCat){
+ public function __construct($idContenu,$nomContenu,$descriptionContenu){
     $this->idContenu=$idContenu;
     $this->nomContenu=$nomContenu;
     $this->descriptionContenu=$descriptionContenu;
