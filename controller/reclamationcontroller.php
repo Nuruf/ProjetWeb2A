@@ -67,6 +67,16 @@ class ReclamationController {
     // Execute the query and return the result
     return $statement->execute();
 }
+public function addAnswer($id_reclamation, $answer) {
+    $db = DatabaseConfig::getConnexion();
+
+    $query = "INSERT INTO réponse (id_reponse, contenu, date_reponse, id_reclamation) VALUES (NULL, :contenu, NOW(), :id_reclamation )";
+    $stmt = $db->prepare($query);
+    $stmt->bindParam(':id_reclamation', $id_reclamation, PDO::PARAM_INT);
+    $stmt->bindParam(':contenu', $answer, PDO::PARAM_STR);
+
+    return $stmt->execute();
+}
 
 }
 ?>
