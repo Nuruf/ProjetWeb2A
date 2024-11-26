@@ -25,11 +25,6 @@ $posts = $postController->getPosts();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Dashboard</title>
     <link rel="stylesheet" href="userstyle.css">
-    <style>
-        /* General Styles */
-        
-
-    </style>
 </head>
 <body>
 
@@ -65,11 +60,11 @@ $posts = $postController->getPosts();
     <div id="blog-content" class="section-content">
         <h2 class="section-title">Blog</h2>
 
-        <form method="POST">
+        <form method="POST" id="postForm">
             <h3>Create a Post</h3>
             <input type="hidden" name="action" value="addPost">
-            <input type="text" name="title" placeholder="Title" required>
-            <textarea name="content" placeholder="Content" required></textarea>
+            <input type="text" name="title" id="postTitle" placeholder="Title">
+            <textarea name="content" id="postContent" placeholder="Content"></textarea>
             <button type="submit">Post</button>
         </form>
 
@@ -79,15 +74,6 @@ $posts = $postController->getPosts();
                 <h4><?= htmlspecialchars($post['title']) ?></h4>
                 <p><?= htmlspecialchars($post['content']) ?></p>
 
-                <!-- Edit Post Form -->
-                <form method="POST">
-                    <input type="hidden" name="action" value="editPost">
-                    <input type="hidden" name="id" value="<?= $post['id'] ?>">
-                    <input type="text" name="title" value="<?= htmlspecialchars($post['title']) ?>" required>
-                    <textarea name="content" required><?= htmlspecialchars($post['content']) ?></textarea>
-                    <button type="submit">Edit Post</button>
-                </form>
-
                 <!-- Comments Section -->
                 <div class="comment-section">
                     <h4>Comments:</h4>
@@ -96,22 +82,14 @@ $posts = $postController->getPosts();
                     foreach ($comments as $comment): ?>
                         <div class="comment">
                             <p><?= htmlspecialchars($comment['comment']) ?></p>
-
-                            <!-- Edit Comment Form -->
-                            <form method="POST">
-                                <input type="hidden" name="action" value="editComment">
-                                <input type="hidden" name="id" value="<?= $comment['id'] ?>">
-                                <textarea name="comment" required><?= htmlspecialchars($comment['comment']) ?></textarea>
-                                <button type="submit">Edit Comment</button>
-                            </form>
                         </div>
                     <?php endforeach; ?>
 
                     <!-- Add Comment Form -->
-                    <form method="POST">
+                    <form method="POST" class="commentForm">
                         <input type="hidden" name="action" value="addComment">
                         <input type="hidden" name="post_id" value="<?= $post['id'] ?>">
-                        <textarea name="comment" placeholder="Add your comment here" required></textarea>
+                        <textarea name="comment" class="commentInput" placeholder="Add your comment here"></textarea>
                         <button type="submit">Add Comment</button>
                     </form>
                 </div>
@@ -120,15 +98,49 @@ $posts = $postController->getPosts();
     </div>
 </div>
 
+<!-- JavaScript -->
 <script>
+    // Show specific section
     function showSection(sectionId) {
         const sections = document.querySelectorAll('.section-content');
         sections.forEach(section => section.style.display = 'none');
-
         const selectedSection = document.getElementById(sectionId + '-content');
         if (selectedSection) selectedSection.style.display = 'block';
     }
 
+    // Validate Post Form
+    document.getElementById('postForm').addEventListener('submit', function(event) {
+        const title = document.getElementById('postTitle').value.trim();
+        const content = document.getElementById('postContent').value.trim();
+
+        if (title === "") {
+            alert("The title cannot be empty.");
+            event.preventDefault();
+        } else if (content === "") {
+            alert("The content cannot be empty.");
+            event.preventDefault();
+        } else if (content.length < 20) {
+            alert("The content must have at least 20 characters.");
+            event.preventDefault();
+        }
+    });
+
+    // Validate Comment Form
+    document.querySelectorAll('.commentForm').forEach(function(form) {
+        form.addEventListener('submit', function(event) {
+            const commentInput = form.querySelector('.commentInput').value.trim();
+
+            if (commentInput === "") {
+                alert("The comment cannot be empty.");
+                event.preventDefault();
+            } else if (commentInput.length < 5) {
+                alert("The comment must have at least 5 characters.");
+                event.preventDefault();
+            }
+        });
+    });
+
+    // Load the default section
     document.addEventListener('DOMContentLoaded', () => showSection('profile'));
 </script>
 
