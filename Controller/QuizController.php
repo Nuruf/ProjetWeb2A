@@ -106,6 +106,29 @@ class QuizController{
                 die('Error: ' . $e->getMessage());
             }
         }
+
+
+        public function getQuizById($quiz_id) {
+            $sql = "SELECT nomQuiz, description1 FROM quiz WHERE idquiz = :quiz_id";
+        
+            // Connexion à la base de données
+            $db = config::getconnexion(); 
+        
+            // Préparation et exécution de la requête
+            $query = $db->prepare($sql);
+            $query->bindParam(':quiz_id', $quiz_id, PDO::PARAM_INT);
+            $query->execute();
+        
+            // Retourner les résultats
+            return $query->fetch(PDO::FETCH_ASSOC);
+        }
+        
+
+
+
+
+
+
 }
     
     
