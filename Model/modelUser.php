@@ -24,7 +24,9 @@ class User {
         $this->Telephone= $phone;
         $this->Role = $role;
     }
-
+    public function getId() {
+        return $this->Id;
+    }
     public function setEmail($Email) {
         $this->Email = $Email;
     }

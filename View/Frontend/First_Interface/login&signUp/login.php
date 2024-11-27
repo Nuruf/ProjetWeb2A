@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['email'], $_GET['passwor
         } elseif ($user['Role'] == 1) {
             // Rediriger vers le tableau de bord utilisateur
             echo "<script>alert('correction reussi .');</script>";
-            header('Location: ../../dashbordfront.Office/dashboard frontoffice.php?name=' . urlencode($user['Utilisateur']) .'#profile');
+            header('Location: ../../dashbordfront.Office/dashboard frontoffice.php?id=' . urlencode($user['Id']) );
             exit;
         }
     } else {

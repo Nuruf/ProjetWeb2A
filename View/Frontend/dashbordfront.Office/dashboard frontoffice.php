@@ -27,12 +27,23 @@
     </aside>
     <?php
 
-$user = isset($_GET['name']) ? htmlspecialchars($_GET['name']) : "Utilisateur inconnu";
+include $_SERVER['DOCUMENT_ROOT'] . '/PROJET WEB/Model/modelUser.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/PROJET WEB/Controller/controllerUser.php';
+
+$id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+$userController = new CoursController();
+
+
+if ($id > 0) {
+    $user = $userController->getUserByIdd($id);
+} else {
+    $user = null;
+}
 ?>
     <!-- Contenu principal -->
     <main class="main-content">
         <header class="user-info">
-            <span>Bienvenue     ,<?= $user; ?>  </span>
+            <span>Bienvenue     ,</strong> <?= htmlspecialchars($user['Utilisateur']); ?> </span>
            <a href="http://localhost/projet%20web/View/Frontend/First_Interface/login&signUp/login.php">
              <button class="logout-btn"><i class="fas fa-sign-out-alt"> </i> Déconnexion</button>
         </a>
@@ -40,11 +51,44 @@ $user = isset($_GET['name']) ? htmlspecialchars($_GET['name']) : "Utilisateur in
 
         <div class="content">
             <div id="profile-content" class="section-content">
-                <h2>Profile</h2>
+                <h1>Profile</h1>
 
 
-                <p>Gérez vos informations personnelles et vos préférences.</p>
+                <?php if ($user): ?>
+                    <div class="profile-info">
+    <p><strong>Nom :</strong> <?= htmlspecialchars($user['Utilisateur']); ?></p>
+    <p><strong>Email :</strong> <?= htmlspecialchars($user['Email']); ?></p>
+    <p><strong>telephone :</strong> <?= htmlspecialchars($user['Telephone']); ?></p>
+    <p><strong>mot de passe :</strong> <?= htmlspecialchars($user['MotDePasse']); ?></p>
+          
+<?php else: ?>
+    <p>Utilisateur non trouvé ou ID invalide.</p>
+<?php endif; ?>
+
+
+                     <form method="GET" action="updateUtilisateur.php">
+                        <input type="hidden" value="<?= $user['Id']; ?>" name="id">
+                        <button class="btn-update" type="submit">Modifier</button>
+                    </form>
+
+</div>
+
+
+
+
             </div>
+
+
+
+
+
+
+
+
+
+
+
+
             <div id="forum-content" class="section-content">
                 <h2>Forum</h2>
                 <p>Participez aux discussions et interagissez avec la communauté.</p>

@@ -111,3 +111,41 @@ body {
 .section-content p {
     line-height: 1.6;
 }
+
+
+/*****************/
+
+/* Style du conteneur de profil */
+.profile-info {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+    margin: 20px;
+}
+
+/* Style des paragraphes */
+.profile-info p {
+    font-size: 16px;
+    margin: 10px 0;
+    color: #333;
+}
+
+/* Mettre en surbrillance les labels (Nom, Email, etc.) */
+.profile-info strong {
+    color: #007bff;
+}
+
+/* Style de texte pour les erreurs */
+.profile-info p.error {
+    color: red;
+    font-weight: bold;
+}
+
+/* Ajout d'un effet de survol pour le cadre de profil */
+.profile-info:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+}
