@@ -11,8 +11,6 @@ $list = $contenuController->listContenus();
     <title>Content List</title>
 </head>
 <body>
-    <td><a href="deleteContenu.php?id=<?php echo $contenu['idContenu']; ?>">Delete</a></td>
-    <td><a href="editContenu.php?id=<?php echo $contenu['idContenu']; ?>">Edit</a></td>
 
     <h1>Contenu</h1>
     <a href="createContenu.php">Add New Content</a>
@@ -22,6 +20,7 @@ $list = $contenuController->listContenus();
                 <th>ID</th>
                 <th>Name</th>
                 <th>Description</th>
+                <th colspan="2">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -30,6 +29,8 @@ $list = $contenuController->listContenus();
                     <td><?php echo htmlspecialchars($contenu['idContenu']); ?></td>
                     <td><?php echo htmlspecialchars($contenu['nomContenu']); ?></td>
                     <td><?php echo htmlspecialchars($contenu['descriptionContenu']); ?></td>
+                    <td><a href="deleteContenu.php?idContenu=<?php echo $contenu['idContenu']; ?>">Delete</a></td>
+                    <td><a href="editContenu.php?idContenu=<?php echo $contenu['idContenu']; ?>">Edit</a></td>
                 </tr>
             <?php endforeach; ?>
         </tbody>

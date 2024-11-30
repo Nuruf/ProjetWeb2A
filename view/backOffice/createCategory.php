@@ -4,31 +4,17 @@ $error = "";
 
 // Create an instance of the controller
 $categoriesController = new categoriesController(); 
-$imageCat = null; // Default to null in case no image is uploaded
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Check if required fields are set and not empty
-    if (
-        isset($_POST["nomCat"]) && 
-        isset($_POST["descriptionCat"]) && 
-        isset($_FILES["imageCat"]) && 
-        $_FILES["imageCat"]["error"] === UPLOAD_ERR_OK // Check for upload errors
-    ) {
-        if (
-            !empty($_POST["nomCat"]) && 
-            !empty($_POST["descriptionCat"]) && 
-            !empty($_FILES["imageCat"]["name"]) // Ensure the file input is not empty
-        ) {
-            // Handle file upload
-            $imageCat = $_FILES['imageCat']['name'];
-            $targetDir = 'uploads/'; // Ensure this directory exists and is writable
-            move_uploaded_file($_FILES['imageCat']['tmp_name'], $targetDir . basename($imageCat));
-
+    if (isset($_POST["nomCat"]) && isset($_POST["descriptionCat"])) {
+        
+        if (!empty($_POST["nomCat"]) && !empty($_POST["descriptionCat"])) {
             // Create a new category object
             $category = new category( 
                 null, 
                 $_POST['nomCat'], 
                 $_POST['descriptionCat'], 
-                $imageCat // Use the filename after moving the file
             );
 
             // Add the category using the controller
@@ -70,10 +56,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="form-group">
                 <label for="descriptionCat">Category Description</label>
                 <textarea class="form-control" id="descriptionCat" name="descriptionCat" rows="3" required></textarea>
-            </div>
-            <div class="form-group">
-                <label for="eventImage">Event Image</label>
-                <input type="file" class="form-control" id="eventimage" name="image" accept="image/*" required>
             </div>
             <button type="submit" class="btn btn-primary">Create Category</button>
         </form>

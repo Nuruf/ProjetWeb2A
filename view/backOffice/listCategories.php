@@ -11,9 +11,6 @@ $list = $categoriesController->listCategories();
     <title>Category List</title>
 </head>
 <body>
-    <td><a href="deleteCategory.php?id=<?php echo $category['idCat']; ?>">Delete</a></td>
-    <td><a href="editCategory.php?id=<?php echo $category['idCat']; ?>">Edit</a></td>
-
     <h1>Categories</h1>
     <a href="createCategory.php">Add New Category</a>
     <table border="1">
@@ -22,7 +19,7 @@ $list = $categoriesController->listCategories();
                 <th>ID</th>
                 <th>Name</th>
                 <th>Description</th>
-                <th>Image</th>
+                <th colspan="2">CRUD</th>
             </tr>
         </thead>
         <tbody>
@@ -30,8 +27,10 @@ $list = $categoriesController->listCategories();
                 <tr>
                     <td><?php echo htmlspecialchars($category['idCat']); ?></td>
                     <td><?php echo htmlspecialchars($category['nomCat']); ?></td>
-                    <td><?php echo htmlspecialchars($category['descriptionCat']); ?></td>
-                    <td><img src="../../images/<?php echo htmlspecialchars($category['imageCat']); ?>" alt="" width="100"></td>
+                    <td><?php echo htmlspecialchars($category['descriptionCat']); ?></td>                    
+                    <td><a href="deleteCategory.php?idCat=<?php echo htmlspecialchars($category['idCat']); ?>">Delete</a></td>
+                    <td><a href="editCategory.php?idCat=<?php echo htmlspecialchars($category['idCat']); ?>">Edit</a></td>
+
                 </tr>
             <?php endforeach; ?>
         </tbody>

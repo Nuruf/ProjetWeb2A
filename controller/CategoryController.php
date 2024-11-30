@@ -2,10 +2,8 @@
 include(__DIR__ . '/../config.php');
 include(__DIR__ . '/../model/categories.php');
 
-class categoriesController
-{
-    public function listCategories()
-    {
+class categoriesController{
+    public function listCategories(){
         $sql = "SELECT * FROM categories";
         $db = config::getConnexion();
         try {
@@ -16,8 +14,7 @@ class categoriesController
         }
     }
 
-    function deleteCategory($idCat)
-    {
+    function deleteCategory($idCat){
         $sql = "DELETE FROM categories WHERE idCat = :idCat"; 
         $db = config::getConnexion();
         $req = $db->prepare($sql);
@@ -30,41 +27,35 @@ class categoriesController
         }
     }
 
-    function addCategory($category)
-    {
-        $sql = "INSERT INTO categories VALUES (NULL,:nomCat, :descriptionCat, :imageCat)";
+    function addCategory($category){
+        $sql = "INSERT INTO categories VALUES (NULL,:nomCat, :descriptionCat)";
         $db = config::getConnexion();
         try {
             $query = $db->prepare($sql);
             $query->execute([
                 'nomCat' => $category->getNomCat(),
-                'descriptionCat' => $category->getDescriptioncat(),
-                'imageCat' => $category->getImageCat()
+                'descriptionCat' => $category->getDescriptioncat()
             ]);
         } catch (Exception $e) {
             echo 'Error: ' . $e->getMessage();
         }
     }
 
-    function updateCategory($category, $idCat)
-    {
+    function updateCategory($category, $idCat){
         try {
             $db = config::getConnexion();
 
             $query = $db->prepare(
                 'UPDATE categories SET 
                     nomCat = :nomCat,
-                    descriptionCat = :descriptionCat,
-                    imageCat = :imageCat
-                WHERE idCatCat = :idCat' 
+                    descriptionCat = :descriptionCat
+                WHERE idCat = :idCat' 
             );
 
             $query->execute([
                 'idCat' => $idCat,
                 'nomCat' => $category->getNomCat(),
-                'descriptionCat' => $category->getDescriptioncat(),
-                'imageCat' => $category->getImageCat()
-            ]);
+                'descriptionCat' => $category->getDescriptioncat()]);
 
             echo $query->rowCount() . " records UPDATED successfully <br>";
         } catch (PDOException $e) {
@@ -72,8 +63,7 @@ class categoriesController
         }
     }
 
-    function showCategory($idCat)
-    {
+    function showCategory($idCat){
         $sql = "SELECT * FROM categories WHERE idCat = :idCat"; 
         $db = config::getConnexion();
         try {

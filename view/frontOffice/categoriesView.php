@@ -11,10 +11,6 @@
         <div>
             <h2><?php echo htmlspecialchars($category['nomCat']); ?></h2>
             <p><?php echo htmlspecialchars($category['descriptionCat']); ?></p>
-            <!-- Updated image path -->
-            <img src="<?php echo htmlspecialchars($category['imageCat']); ?>.jpg" 
-                 alt="Image of <?php echo htmlspecialchars($category['nomCat']); ?>" 
-                 style="width: 200px;">
         </div>
     <?php endforeach; ?>
 </body>

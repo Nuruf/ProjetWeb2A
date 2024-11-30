@@ -3,28 +3,24 @@ class category{
  private ?int $idCat;
  private ?string $nomCat;
  private ?string $descriptionCat;
- private ?string $imageCat;
 
- public function __construct($idCat, $nomCat,$descriptionCat, $imageCat){
+ public function __construct($idCat=null, $nomCat=null,$descriptionCat=null){
     $this->idCat=$idCat;
     $this->nomCat=$nomCat;
     $this->descriptionCat=$descriptionCat;
-    $this->imageCat=$imageCat;
  }
 
  //getters
  public function getIdCat(){
-    return $this->idCat=$idCat;
+    return $this->idCat;
  }
  public function getNomCat(){
-    return $this->nomCat=$nomCat;
+    return $this->nomCat;
  }
  public function getDescriptioncat(){
-    return $this->descriptionCat=$descriptionCat;
+    return $this->descriptionCat;
  }
- public function getImageCat(){
-    return $this->imageCat=$imageCat;
- }
+
 
  //setters
  public function setIdCat($idCat){
@@ -36,8 +32,6 @@ class category{
  public function setDescriptioncat($descriptionCat){
     $this->descriptionCat=$descriptionCat;
  }
- public function setImageCat($imageCat){
-    $this->imageCat=$imageCat;
- }
+
 }
 ?>

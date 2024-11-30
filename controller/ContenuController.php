@@ -1,5 +1,5 @@
 <?php
-include(__DIR__ . '/../config.php');
+require_once(__DIR__ . '/../config.php');
 include(__DIR__ . '/../model/contenu.php');
 
 class contenuController
@@ -30,6 +30,7 @@ class contenuController
         } catch (Exception $e) {
             die('Error:' . $e->getMessage());
         }
+        echo"test";
     }
 
     // Add a new contenu

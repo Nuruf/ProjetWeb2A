@@ -1,6 +1,6 @@
 <?php
 include '../../controller/CategoryController.php';
-$CategoryController = new CategoryController();
+$CategoryController = new categoriesController();
 $CategoryController->deleteCategory($_GET["idCat"]);
-header('Location:listCategory.php');
+header('Location:listCategories.php');
 ?>
