@@ -1,24 +1,35 @@
 <?php
-require_once '../../model/categories.php';
+require_once '../../controller/categoryController.php';
 
-$categoryModel = new category();
-$category = null; // Initialize the category variable
+$error="";
 
-if (isset($_GET['idCat'])) {
-    $id = $_GET['idCat'];
-    $category = $categoryModel->getIdCat($id); // Fetch category details
-}
+$category= null;
+$categoryController = new categoriesController();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Handle form submission
-    $id = $_POST['idCat'];
-    $name = $_POST['nomCat'];
-    $description = $_POST['descriptionCat'];
+    // Validate that none of the fields are empty
+    if (
+        isset($_POST["nomCat"]) && $_POST["descriptionCat"]) {
+        if (!empty($_POST["nomCat"]) && !empty($_POST["descriptionCat"])) {
+            
 
-    // Update category in the database
-    $categoryModel->updateCategory($id, $name, $description);
-    header('Location: listCategories.php'); // Redirect to the list page
-    exit;
+            // Create the Event object with or without the new image
+            $category = new category(
+                null,
+                $_POST['nomCat'],
+                $_POST['descriptionCat'],
+            );
+
+            // Update the event in the database
+            $categoryController->updateCategory($category, $_POST['idCat']);
+
+            // Redirect to the event list page
+            header('Location:listCategories.php');
+            exit; // Ensure no further processing occurs after the redirect
+        } else {
+            $error = "Missing information";
+        }
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -26,24 +37,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Category</title>
-</head>
-<body>
-    <h1>Edit Category</h1>
+    <title>Admin UNIBOARD</title>
 
-    <?php if ($category): ?>
-        <form action="" method="POST" enctype="multipart/form-data">
-            <input type="hidden" name="idCat" value="<?php echo htmlspecialchars($category['idCat']); ?>">
-            <label for="nomCat">Category Name:</label>
-            <input type="text" name="nomCat" id="nomCat" value="<?php echo htmlspecialchars($category['nomCat']); ?>" required>
-            <br>
-            <label for="descriptionCat">Description:</label>
-            <textarea name="descriptionCat" id="descriptionCat" required><?php echo htmlspecialchars($category['descriptionCat']); ?></textarea>
-            <br>
-            <button type="submit">Update Category</button>
-        </form>
-    <?php else: ?>
-        <p>Category not found. Please check the ID or try again.</p>
-    <?php endif; ?>
+    <?php
+        if (isset($_GET['idCat'])) {
+            $category = $categoryController->showCategory($_GET['idCat']);
+        ?>
+            <form  action="" method="POST" > <!-- Added enctype for file upload -->
+                <div class="mb-3">
+                    <label for="id" class="form-label">ID category:</label>
+                    <input class="form-control" type="text" id="idcategory" name="idcategory" readonly value="<?php echo $_GET['idCat'] ?>">
+                </div>
+                <div class="mb-3">
+                    <label for="nom" class="form-label">Nom category:</label>
+                    <input class="form-control" type="text" id="nomcategory" name="nomcategory" value="<?php echo $category['nomCat'] ?>">
+                    <span id="name_error"></span>
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description:</label>
+                    <textarea class="form-control" id="descriptioncategory" name="descriptioncategory"><?php echo $category['descriptionCat'] ?></textarea>
+                    <span id="description_error"></span>
+                </div>
+            
+                <button type="submit" class="btn btn-primary">Update category</button>
+            </form>
+        <?php
+        }
+        ?>
 </body>
 </html>

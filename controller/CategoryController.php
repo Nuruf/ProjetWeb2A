@@ -41,7 +41,7 @@ class categoriesController{
         }
     }
 
-    function updateCategory($category, $idCat){
+    function updateCategory($category,$idCat){
         try {
             $db = config::getConnexion();
 
