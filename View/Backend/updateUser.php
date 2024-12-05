@@ -3,19 +3,14 @@
 include_once('../../Controller/controllerUser.php');
 include_once('../../Model/modelUser.php');  
 
-
 $user = null;
-
 
 if (isset($_GET['id'])) {
     $userId = $_GET['id'];
-    
 
     $utilisateursController = new CoursController();
-
     $user = $utilisateursController->getUserById($userId);
 }
-
 
 if ($user === null) {
     echo "L'utilisateur demandé n'existe pas.";
@@ -23,21 +18,20 @@ if ($user === null) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['name'], $_POST['motdepasse'], $_POST['email'], $_POST['phone'], $_POST['role'])) {
-  
     $name = $_POST['name']; 
     $email = $_POST['email']; 
     $motdepasse = $_POST['motdepasse']; 
     $phone = $_POST['phone']; 
     $role = $_POST['role'];
 
+    // Création de l'objet User
+    $user = new User($name, $email, $motdepasse, $phone, $role); 
 
-    $user = new User($name, $email,$motdepasse, $phone, $role); 
-
-
+    // Mise à jour de l'utilisateur
     $utilisateursController->updateUser($user, $userId);
 
- 
-    header('Location: dashboard.php');
+    // Redirection vers le dashboard
+    header('Location: dashboard.php?id=' . urlencode($userId));
     exit();
 }
 ?>
@@ -53,7 +47,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['name'], $_POST['motdep
 <body>
     <div class="user-info">
         <img src="logoo.png" alt="User Profile">
-        <span>Bienvenue sur notre site <?= htmlspecialchars($user['Utilisateur']); ?></span>
+        <span>Bienvenue sur notre site <?= htmlspecialchars($user['Utilisateur']); ?></span> <!-- Correction ici -->
+        <h1>Dashboard</h1>
+    <a href=" http://localhost/projet%20web/View/Frontend/First_Interface/login&signUp/login.php ">
+    <button type="submit" class="logout-btn" name="logout">Se déconnecter</button>
+    </a>
     </div>
 
     <nav>
@@ -72,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['name'], $_POST['motdep
             <h2 class="section-title">Modifier l'utilisateur</h2>
             
             <!-- Formulaire de mise à jour -->
-            <form method="POST" >
+            <form method="POST">
                 <input type="hidden" name="id" value="<?= htmlspecialchars($user['Id']); ?>">
 
                 <label for="name">Nom :</label>

@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['email'], $_GET['passwor
         if ($user['Role'] == 0) {
             // Rediriger vers le tableau de bord admin
             echo "<script>alert('connexion réussi page admin.');</script>";
-            header('Location: /PROJET%20WEB/View/Backend/dashboard.php?name=' . urlencode($user['Utilisateur']) .'#profile' );
+            header('Location: /PROJET%20WEB/View/Backend/dashboard.php?id=' . urlencode($user['Id'])  );
             exit;
         } elseif ($user['Role'] == 1) {
             // Rediriger vers le tableau de bord utilisateur

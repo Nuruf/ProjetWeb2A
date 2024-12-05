@@ -9,13 +9,27 @@
 </head>
 <body>
 <?php
-// Récupérer le nom d'utilisateur à partir de l'URL
-$user = isset($_GET['name']) ? htmlspecialchars($_GET['name']) : "Utilisateur inconnu";
+   
+
+    include $_SERVER['DOCUMENT_ROOT'] . '/PROJET WEB/Model/modelUser.php';
+    include $_SERVER['DOCUMENT_ROOT'] . '/PROJET WEB/Controller/controllerUser.php';
+    
+    $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+    $userController = new CoursController();
+    
+    
+    if ($id > 0) {
+        $user = $userController->getUserByIdd($id);
+    } else {
+        $user = null;
+    }
+
+
 ?>
 
 <div class="user-info">
     <img src="logoo.png" alt="User Profile">
-    <span>Bienvenue sur notre site :<?= $user; ?> </span>
+    <span>Bienvenue sur notre site :<?= htmlspecialchars($user['Utilisateur']); ?> </span>
     <h1>Dashboard</h1>
     <a href=" http://localhost/projet%20web/View/Frontend/First_Interface/login&signUp/login.php ">
     <button type="submit" class="logout-btn" name="logout">Se déconnecter</button>
@@ -39,7 +53,7 @@ $user = isset($_GET['name']) ? htmlspecialchars($_GET['name']) : "Utilisateur in
             <h2 class="section-title">Profile</h2>
             <div class="search-container">
     <form method="GET" action="">
-        <input type="text" name="search" id="searchInput" placeholder="Rechercher un cours..." value="<?= isset($_GET['search']) ? htmlspecialchars($_GET['search']) : '' ?>" />
+        <input type="text" name="search" id="searchInput" placeholder="Rechercher un utilisateur..." value="<?= isset($_GET['search']) ? htmlspecialchars($_GET['search']) : '' ?>" />
         <button type="submit">Rechercher</button>
     </form>
 </div>
@@ -91,7 +105,7 @@ if (!empty($searchTerm)) {
                 <td><?= htmlspecialchars($user['Role']); ?></td>
                 <td align="center">
                     <form method="GET" action="updateUser.php">
-                        <input type="hidden" value="<?= htmlspecialchars($user['Id']); ?>" name="id">
+                        <input type="hidden" value="<?= htmlspecialchars($id); ?>" name="id">
                         <button class="btn-update" type="submit">Modifier</button>
                     </form>
                 </td>
