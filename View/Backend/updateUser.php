@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['name'], $_POST['motdep
 <body>
     <div class="user-info">
         <img src="logoo.png" alt="User Profile">
-        <span>Bienvenue sur notre site <?= htmlspecialchars($user['Utilisateur']); ?></span> <!-- Correction ici -->
+        <span>Bienvenue sur notre site : <?= htmlspecialchars($user['Utilisateur']); ?></span> <!-- Correction ici -->
         <h1>Dashboard</h1>
     <a href=" http://localhost/projet%20web/View/Frontend/First_Interface/login&signUp/login.php ">
     <button type="submit" class="logout-btn" name="logout">Se déconnecter</button>
