@@ -37,14 +37,31 @@ $user = isset($_GET['name']) ? htmlspecialchars($_GET['name']) : "Utilisateur in
         <!--div aziz akrout-->
         <div id="profile-content" class="section-content">
             <h2 class="section-title">Profile</h2>
-     +
-            <?php
+            <div class="search-container">
+    <form method="GET" action="">
+        <input type="text" name="search" id="searchInput" placeholder="Rechercher un cours..." value="<?= isset($_GET['search']) ? htmlspecialchars($_GET['search']) : '' ?>" />
+        <button type="submit">Rechercher</button>
+    </form>
+</div>
 
+<?php
+// Inclure les contrôleurs nécessaires
 include_once('../../Controller/controllerUser.php');
+include_once('../../Controller/metierController.php');
+
 
 $utilisateursController = new CoursController();
+$metierController = new metierController();
 
-$list = $utilisateursController->listUser();
+
+$searchTerm = isset($_GET['search']) ? trim($_GET['search']) : '';
+if (!empty($searchTerm)) {
+ 
+    $list = $metierController->searchUsers($searchTerm);
+} else {
+   
+    $list = $utilisateursController->listUser();
+}
 ?>
 
 <!-- Affichage des données dans une table -->
@@ -55,7 +72,6 @@ $list = $utilisateursController->listUser();
             <th>Nom</th>
             <th>Email</th>
             <th>Password</th>
-            
             <th>Telephone</th>
             <th>Rôle</th>
             <th colspan="2">Actions</th>
@@ -67,7 +83,7 @@ $list = $utilisateursController->listUser();
         foreach ($list as $user) {
         ?>
             <tr>
-                <td><?= $user['Id']; ?></td>
+                <td><?= htmlspecialchars($user['Id']); ?></td>
                 <td><?= htmlspecialchars($user['Utilisateur']); ?></td>
                 <td><?= htmlspecialchars($user['Email']); ?></td>
                 <td><?= htmlspecialchars($user['MotDePasse']); ?></td>
@@ -75,12 +91,12 @@ $list = $utilisateursController->listUser();
                 <td><?= htmlspecialchars($user['Role']); ?></td>
                 <td align="center">
                     <form method="GET" action="updateUser.php">
-                        <input type="hidden" value="<?= $user['Id']; ?>" name="id">
+                        <input type="hidden" value="<?= htmlspecialchars($user['Id']); ?>" name="id">
                         <button class="btn-update" type="submit">Modifier</button>
                     </form>
                 </td>
                 <td>
-                    <a class="btn-delete"href="deleteUser.php?id=<?= $user['Id']; ?>">Supprimer</a>
+                    <a class="btn-delete" href="deleteUser.php?id=<?= htmlspecialchars($user['Id']); ?>">Supprimer</a>
                 </td>
             </tr>
         <?php
@@ -88,9 +104,41 @@ $list = $utilisateursController->listUser();
         ?>
     </tbody>
 </table>
+<?php
+// Appel de la fonction pour récupérer les statistiques
+$metierController = new metierController();
+$usersStats = $metierController->getUsersPercentage();
 
-            
-      
+
+?>
+<br><br>
+<hr>
+<hr>
+<br><br>
+<h2 style="text-align: center;">Statistiques des Utilisateurs</h2>
+
+<!-- Tableau des résultats -->
+<table class="table-stats">
+    <thead>
+        <tr>
+            <th>Rôle</th>
+            <th>Nombre</th>
+            <th>Pourcentage</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Clients</td>
+            <td><?php echo $usersStats['clientCount']; ?></td>
+            <td class="percentage"><?php echo $usersStats['clientPercentage']; ?>%</td>
+        </tr>
+        <tr>
+            <td>Administrateurs</td>
+            <td><?php echo $usersStats['adminCount']; ?></td>
+            <td class="percentage"><?php echo $usersStats['adminPercentage']; ?>%</td>
+        </tr>
+    </tbody>
+</table>
         
             
         </div>
