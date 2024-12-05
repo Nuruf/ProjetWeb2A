@@ -1,0 +1,269 @@
+/* Styles généraux */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    display: flex;
+    min-height: 100vh;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+/* Barre latérale */
+.sidebar {
+    width: 250px;
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+    position: fixed;
+    height: 100%;
+}
+
+.sidebar-header {
+    text-align: center;
+}
+
+.sidebar .logo {
+    width: 80px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.menu ul {
+    list-style: none;
+    width: 100%;
+}
+
+.menu ul li {
+    width: 100%;
+}
+
+.menu ul li a {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    color: #ecf0f1;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.menu ul li a:hover {
+    background-color: #34495e;
+}
+
+.menu ul li a i {
+    margin-right: 10px;
+}
+
+/* Contenu principal */
+.main-content {
+    margin-left: 250px;
+    padding: 20px;
+    flex: 1;
+}
+
+.user-info {
+    background-color: #3498db;
+    color: #fff;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.logout-btn {
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.logout-btn:hover {
+    background-color: #c0392b;
+}
+
+/* Sections */
+.section-content {
+    display: none;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.section-content h2 {
+    margin-bottom: 15px;
+    color: #2c3e50;
+}
+
+.section-content p {
+    line-height: 1.6;
+}
+
+button {
+    background-color: #0056b3;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #003f7f;
+}
+
+/* Styles spécifiques pour l'affichage des questions et des réponses */
+.quiz-container {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.quiz-item {
+    margin-bottom: 20px;
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+.quiz-item:last-child {
+    border-bottom: none;
+}
+
+.quiz-item h3 {
+    font-size: 20px;
+    color: #0056b3;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.quiz-item p {
+    color: #666;
+    margin: 5px 0;
+    font-size: 16px;
+}
+
+/* Questions avec leur numéro */
+.quiz-item span {
+    font-weight: bold;
+    color: #333;
+}
+
+/* Styles des réponses */
+.answer-list {
+    margin-top: 10px;
+}
+
+.answer-list label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+}
+
+.answer-list input[type="radio"] {
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.answer-list input[type="radio"]:checked + label {
+    color: #28a745;
+}
+
+.answer-list label:hover {
+    color: #007bff;
+}
+
+/* Points de chaque question */
+.points {
+    font-size: 14px;
+    color: #888;
+    font-weight: bold;
+}
+
+/* Correction des erreurs de mise en forme des réponses */
+.answer-list input[type="radio"]:disabled + label {
+    color: #aaa;
+    cursor: not-allowed;
+}
+
+/* Styling pour les réponses Correctes */
+.answer-list input[type="radio"]:checked + label {
+    color: #28a745; /* Vert pour une bonne réponse */
+}
+
+/* Styling pour les réponses Incorrectes */
+.answer-list input[type="radio"]:not(:checked) + label {
+    color: #dc3545; /* Rouge pour une mauvaise réponse */
+}
+
+
+
+
+/* Styles pour la table spécifique au quiz */
+.quiz-table {
+    width: 80%; /* Taille de la table */
+    margin: 20px auto; /* Centrage de la table */
+    border-collapse: collapse; /* Supprimer l'espacement entre les cellules */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre autour de la table */
+}
+
+.quiz-table th, .quiz-table td {
+    padding: 12px; /* Espacement des cellules */
+    text-align: left; /* Alignement du texte à gauche */
+    border: 1px solid #ddd; /* Bordure légère autour des cellules */
+}
+
+.quiz-table th {
+    background-color: #3498db; /* Fond gris pour les en-têtes */
+    color: white;
+    font-weight: bold; /* Texte en gras pour les en-têtes */
+}
+
+.quiz-table td {
+    background-color: #fff; /* Fond blanc pour les cellules */
+}
+
+.quiz-table td a {
+    color: #6a5acd; /* Couleur du lien (violet) */
+    text-decoration: none; /* Supprimer le souligné par défaut des liens */
+}
+
+.quiz-table td a:hover {
+    text-decoration: underline; /* Souligner le lien au survol */
+    color: #483d8b; /* Changer la couleur du lien au survol */
+}
+
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+footer p {
+    margin: 5px 0;
+}
