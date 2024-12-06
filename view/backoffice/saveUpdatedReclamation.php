@@ -17,9 +17,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if ($updated) {
             echo "Reclamation updated successfully.";
-            // Redirect to a confirmation page or the reclamation list
-            header("Location: reclamationlist.php");
+            $userId = $reclamationController->getUserIdByReclamationId($id); // Fetch the user ID
+            echo $userId;
+            header("Location: reclamationlist.php?id_user=" . urlencode($userId));
             exit();
+
         } else {
             echo "Failed to update reclamation. Please try again.";
         }

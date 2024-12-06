@@ -55,7 +55,8 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
     
     <!-- see awnser button-->
     <form action="reclamationlist.php" method="post" style="display:inline;">
-        <button type="submit">back to reclamation list</button>
-    </form>
+    <input type="hidden" name="id_user" value="<?= htmlspecialchars($reclamation['id_user']) ?>">
+    <button type="submit">Back to Reclamation List</button>
+</form>
 </body>
 </html>

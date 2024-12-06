@@ -77,6 +77,34 @@ public function addAnswer($id_reclamation, $answer) {
 
     return $stmt->execute();
 }
+public function getReclamationsByUserId($userId){
+    $db = DatabaseConfig::getConnexion();
+    $stmt = $db->prepare("SELECT * FROM reclamation WHERE id_user = :id_user");
+    $stmt->bindParam(':id_user', $userId, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+
+}
+public function getUserIdByReclamationId($id)
+{
+    $db = DatabaseConfig::getConnexion();
+    $query = "SELECT id_user FROM reclamation WHERE id = :id";
+    $stmt = $db->prepare($query);
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    $stmt->execute();
+    
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+    
+    return $result['id_user'];
+}
+public function getReclamationsByStatus($status) {
+    $db = DatabaseConfig::getConnexion();
+    $stmt = $db->prepare("SELECT * FROM reclamation WHERE status = ?");
+    $stmt->execute([$status]);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
 
 }
 ?>

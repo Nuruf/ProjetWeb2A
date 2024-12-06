@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if ($success) {
             echo "Answer saved successfully.";
-            header("Location: reclamationlist.php"); // Redirect to a success page
+            header("Location: reclamationlistadmin.php"); // Redirect to a success page
             exit();
         } else {
             echo "Failed to save the answer.";

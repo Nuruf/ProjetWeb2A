@@ -4,9 +4,25 @@ require_once 'C:\xampp\htdocs\projet web\conf.php';
 
 // Create an instance of the controller
 $reclamationController = new ReclamationController();
+$userId = null;
 
 // Retrieve all reclamations
-$reclamations = $reclamationController->getAllReclamations();
+/*if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_user'])) {
+    $userId = (int) $_POST['id_user']; // Sanitize user input
+    $reclamations = $reclamationController->getReclamationsByUserId($userId); // Get reclamations by user ID
+}*/
+// Check for POST or GET
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_user'])) {
+    $userId = (int) $_POST['id_user'];
+} elseif (isset($_GET['id_user'])) {
+    $userId = (int) $_GET['id_user'];
+}
+
+// Fetch reclamations
+if ($userId !== null) {
+    $reclamations = $reclamationController->getReclamationsByUserId($userId);
+}
+
 
 ?>
 
@@ -61,10 +77,6 @@ $reclamations = $reclamationController->getAllReclamations();
 </head>
 <body>
     <h1>Reclamation List</h1>
-    <form action="allreponseslist.php" method="GET" style="display:inline;">
-                    
-                        <button type="submit">see all awnsers</button>
-                    </form>
     <table>
     <thead>
     <tr>
@@ -97,11 +109,11 @@ $reclamations = $reclamationController->getAllReclamations();
                         <input type="hidden" name="id" value="<?= htmlspecialchars($reclamation['id']) ?>">
                         <button type="submit">Update</button>
                     </form>
-                    <!-- awnser button-->
+                    <!-- 
                     <form action="awnser.php" method="GET" style="display:inline;">
                         <input type="hidden" name="id" value="<?= htmlspecialchars($reclamation['id']) ?>">
                         <button type="submit">awnser</button>
-                    </form>
+                    </form>-->
                     <!-- see awnser button-->
                     <form action="affichereponse.php" method="GET" style="display:inline;">
                         <input type="hidden" name="id" value="<?= htmlspecialchars($reclamation['id']) ?>">
@@ -119,7 +131,9 @@ $reclamations = $reclamationController->getAllReclamations();
         </tr>
     <?php endif; ?>
 </tbody>
-
+<form action="/view/frontend/user1.html" style="display:inline;">
+        <button type="submit">back to reclamation list</button>
+    </form>
     </table>
 </body>
 </html>

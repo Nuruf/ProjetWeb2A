@@ -153,6 +153,10 @@ $reponses = $reponseController->getReponsesWithReclamation();
 </head>
 <body>
     <h1>Liste de toutes les réponses</h1>
+    <form action="reclamationlistadmin.php" method="post" style="display:inline;">
+    <input type="hidden" name="id_user" value="<?= htmlspecialchars($reclamation['id_user']) ?>">
+    <button type="submit">Back to Reclamation List</button>
+    </form>
     <?php if ($reponses && count($reponses) > 0): ?>
         <table>
             <thead>

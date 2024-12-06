@@ -7,8 +7,10 @@ if (isset($_POST['id']) && !empty($_POST['id'])) {
 
     try {
         // Call delete function
+        $userId = $reclamationController->getUserIdByReclamationId($_POST['id']); // Fetch the user ID
+        echo $userId;
         $reclamationController->deleteReclamation($_POST['id']);
-        header('Location: reclamationList.php'); // Redirect back to list
+        header("Location: reclamationlist.php?id_user=" . urlencode($userId));
         exit();
     } catch (Exception $e) {
         echo 'Error deleting reclamation: ' . $e->getMessage();

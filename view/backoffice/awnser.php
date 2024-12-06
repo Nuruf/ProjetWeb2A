@@ -19,7 +19,81 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css"> <!-- Optional: Your CSS file -->
+    <style>
+        /* General Body Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            padding: 20px;
+            margin: 0;
+        }
+
+        /* Heading Styles */
+        h1, h2 {
+            color: #333;
+            text-align: center;
+        }
+
+        /* Text Styles for Description and Status */
+        p {
+            font-size: 18px;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        /* List Styles for Responses */
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            margin-bottom: 10px;
+            padding: 10px;
+        }
+
+        li strong {
+            color: #007acc;
+        }
+
+        /* Button Styles */
+        button {
+            padding: 10px 20px;
+            background-color: #007acc;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        button:hover {
+            background-color: #005f99;
+        }
+
+        /* Form Styles */
+        form {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        /* Optional: Link Styling (if needed for other links) */
+        a {
+            color: #007acc;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
     <title>Answer Reclamation</title>
 </head>
 <body>

@@ -18,7 +18,7 @@ if (isset($_POST["user_id"]) && isset($_POST["description"])) {
 
         $reclamationController->addReclamation($reclamation);
 
-        header('Location: reclamationList.php'); // Redirect to a reclamation list page
+        header('Location: ../frontend/user1.html'); // Redirect to a reclamation list page
         exit(); // Always call exit after header redirect to stop further script execution
     } else {
         $error = "Veuillez remplir tous les champs.";
