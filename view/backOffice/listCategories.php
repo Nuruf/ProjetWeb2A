@@ -29,7 +29,12 @@ $list = $categoriesController->listCategories();
                     <td><?php echo htmlspecialchars($category['nomCat']); ?></td>
                     <td><?php echo htmlspecialchars($category['descriptionCat']); ?></td>                    
                     <td><a href="deleteCategory.php?idCat=<?php echo htmlspecialchars($category['idCat']); ?>">Delete</a></td>
-                    <td><a href="editCategory.php?idCat=<?php echo htmlspecialchars($category['idCat']); ?>">Edit</a></td>
+                    <td>
+                        <form method="POST" action="editCategory.php" class="btn btn-primary"> 
+                            <input type="submit" name="update" value="Update" class="btn btn-primary">
+                            <input type="hidden" value="<?= htmlspecialchars($category['idCat']); ?>" name="idCat">
+                        </form>
+                    </td>
 
                 </tr>
             <?php endforeach; ?>
