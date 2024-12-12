@@ -8,7 +8,7 @@ class HistoriqueController{
         $db=config::getconnexion();
         try{
             $lists=$db->query($sql);
-            return $lists;
+            return $lists->fetchAll(PDO::FETCH_ASSOC);
         }
         catch(Exception $e){
             die('Error:'.$e->getMessage());
@@ -33,6 +33,12 @@ class HistoriqueController{
         
     }
 
-
+    public function countHistorique() {
+        $sql = "SELECT COUNT(*) as total FROM historique";
+        $db = config::getConnexion();
+        $req = $db->query($sql);
+        $result = $req->fetch(PDO::FETCH_ASSOC);
+        return $result['total'];
+    }
 
 }

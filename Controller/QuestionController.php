@@ -80,7 +80,14 @@ class QuestionController{
     
             }
     
-    
+            public function getNumberOfQuestions($quizId) {
+                $db=config::getconnexion();
+                $stmt = $db->prepare("SELECT COUNT(*) as question_count FROM question WHERE idquiz = :quiz_id");
+                $stmt->bindParam(':quiz_id', $quizId, PDO::PARAM_INT);
+                $stmt->execute();
+                $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                return $result['question_count'] ?? 0;
+            }
 
 
             function showQuestion($id)
