@@ -1,0 +1,151 @@
+/* Style de base pour le corps de la page */
+tbody {
+    font-family: Arial, sans-serif;
+    background-color: #f0f8ff;
+    margin: 40px;
+    padding: 0;
+    color: #333;
+}
+
+
+
+/* Style pour les questions */
+.question-container {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    padding: 15px;
+    width: 80%;
+}
+
+.question-container h3 {
+    font-size: 1.5rem;
+    color: #0066cc;
+    margin-bottom: 10px;
+}
+
+.question-container p {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    color: #555;
+}
+
+/* Style pour les réponses */
+.answers {
+    margin: 10px 0;
+    padding: 0;
+}
+
+.answers label {
+    display: block;
+    font-size: 1rem;
+    color: #333;
+    padding: 5px 0;
+}
+
+.answers input[type="radio"] {
+    margin-right: 10px;
+}
+
+/* Style des points */
+.points {
+    font-size: 1.2rem;
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+/* Boutons */
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 20px;
+    display: block;
+    width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color:  #034081
+}
+
+/* Section des résultats */
+.results {
+    background-color: #dcdcdc;
+    padding: 20px;
+    margin-top: 30px;
+    text-align: center;
+    border-radius: 10px;
+}
+
+/* Mise en forme des éléments de la table */
+table {
+    width: 100%;
+    margin-top: 60px;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+table th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+table tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Style des champs de formulaire */
+input[type="text"], input[type="radio"], input[type="submit"] {
+    margin: 5px 0;
+    padding: 8px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Éléments spécifiques aux quiz */
+.quiz-header {
+    text-align: center;
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.question-text {
+    margin:80px;
+    margin-top: 20px;  /* Marge au-dessus de chaque question */
+    margin-bottom: 15px;  /* Marge en dessous de chaque question */
+}
+
+/* Centrer le tableau sur la page */
+.table-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+}
+
+table {
+    border-collapse: collapse;
+    width: 80%; /* Ajustez la largeur du tableau si nécessaire */
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
