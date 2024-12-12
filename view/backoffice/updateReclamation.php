@@ -23,6 +23,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="user.css">
     <title>Update Reclamation</title>
+    <link rel="stylesheet" href="../frontend\updatereclamation.css">
 </head>
 <body>
     <h1>Update Reclamation</h1>

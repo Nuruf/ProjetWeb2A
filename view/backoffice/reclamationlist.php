@@ -32,48 +32,7 @@ if ($userId !== null) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reclamation List</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f9f9f9;
-            padding: 20px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            background-color: #ffffff;
-        }
-        table, th, td {
-            border: 1px solid #ddd;
-        }
-        th, td {
-            padding: 10px;
-            text-align: left;
-        }
-        th {
-            background-color: #007acc;
-            color: white;
-        }
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-        h1 {
-            text-align: center;
-            color: #333;
-        }
-        .btn {
-            padding: 5px 10px;
-            background-color: #007acc;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            font-size: 14px;
-        }
-        .btn:hover {
-            background-color: #005f99;
-        }
-    </style>
+    <link rel="stylesheet" href="../frontend\reclamationlist.css">
 </head>
 <body>
     <h1>Reclamation List</h1>
@@ -132,7 +91,7 @@ if ($userId !== null) {
     <?php endif; ?>
 </tbody>
 <form action="../frontend/user1.html" style="display:inline;">
-        <button type="submit">back to reclamation list</button>
+        <button type="submit">back to user form</button>
     </form>
     </table>
 </body>

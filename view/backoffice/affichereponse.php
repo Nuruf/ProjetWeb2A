@@ -32,7 +32,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Responses for Reclamation</title>
-    <link rel="stylesheet" href="style.css"> <!-- Optional: Add your stylesheet -->
+    <link rel="stylesheet" href="../frontend\affichereponse.css">
 </head>
 <body>
     <h1>Responses for Reclamation #<?= htmlspecialchars($reclamation['id']) ?></h1>
