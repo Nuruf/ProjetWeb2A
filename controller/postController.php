@@ -94,5 +94,6 @@ public function getPostsByMostComments() {
 }
 
 }
+//ratings
 ?>
 

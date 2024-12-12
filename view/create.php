@@ -264,10 +264,11 @@ if ($sortType === 'recent') {
         </div>
     </div>
 </div>
-
+//ratings
    
 
 <!-- End of Create Post Form -->
+
 
 <script>
   function validatePostForm() {
