@@ -131,7 +131,7 @@ if ($userId !== null) {
         </tr>
     <?php endif; ?>
 </tbody>
-<form action="/view/frontend/user1.html" style="display:inline;">
+<form action="../frontend/user1.html" style="display:inline;">
         <button type="submit">back to reclamation list</button>
     </form>
     </table>

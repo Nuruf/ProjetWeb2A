@@ -105,6 +105,32 @@ public function getReclamationsByStatus($status) {
     $stmt->execute([$status]);
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
+public function getReclamationCountsByStatus()
+{
+    try {
+        $db = DatabaseConfig::getConnexion(); // Assurez-vous que cette méthode retourne une connexion PDO.
+        $query = "
+            SELECT 
+                SUM(CASE WHEN status = 'Open' THEN 1 ELSE 0 END) AS open,
+                SUM(CASE WHEN status = 'Closed' THEN 1 ELSE 0 END) AS closed
+            FROM reclamation";
+        $stmt = $db->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return [
+            'open' => intval($result['open']),
+            'closed' => intval($result['closed'])
+        ];
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+        return [
+            'open' => 0,
+            'closed' => 0
+        ];
+    }
+}
+
 
 }
 ?>
