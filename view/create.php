@@ -1,13 +1,14 @@
-<?php
-include '../config.php';
-include '../controller/postController.php';
-include '../controller/commentController.php';
+<?php 
+include '../config.php'; 
+include '../controller/postController.php'; 
+include '../controller/commentController.php'; 
 
-// Initialize controllers
+// Initializing controllers
 $postController = new PostController($pdo);
 $commentController = new CommentController($pdo);
 
 $error = ''; // Variable to hold error messages
+$commentError = ''; // Specific variable for comment errors
 
 // Handle POST requests for creating a post or comment
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -19,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Validate input
         if (!empty($title) && !empty($content)) {
             $postController->createPost($title, $content);
-            header("Location: create.php");  // Redirect after creating post
+            header("Location: create.php");
             exit;
         } else {
             $error = "Both title and content are required.";
@@ -31,17 +32,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         // Validate input
         if (!empty($comment) && !empty($postId)) {
-            $commentController->createComment($postId, $comment);
-            header("Location: create.php");  // Redirect after creating comment
-            exit;
+            try {
+                $result = $commentController->createComment($postId, $comment);
+                if ($result) {
+                    header("Location: create.php");
+                    exit;
+                } else {
+                    $commentError = "Unable to create comment.";
+                }
+            } catch (Exception $e) {
+                $commentError = $e->getMessage(); // This will catch the bad word exception
+            }
         } else {
-            $error = "Comment cannot be empty.";
+            $commentError = "Comment cannot be empty.";
         }
     }
 }
 
 // Fetch the selected posts based on user choice (recent or most popular)
-$sortType = isset($_GET['sort_type']) ? $_GET['sort_type'] : 'recent'; // Default to recent if no option selected
+$sortType = isset($_GET['sort_type']) ? $_GET['sort_type'] : 'recent'; 
 
 if ($sortType === 'recent') {
     // Fetch recent posts sorted by creation time
@@ -236,7 +245,11 @@ if ($sortType === 'recent') {
                 </div>
                 <div class="card-footer">
                     <!-- Like/Dislike Buttons -->
+<<<<<<< HEAD
+        <div class="d-flex align-items-center reaction-container">
+=======
                     <div class="d-flex align-items-center reaction-container">
+>>>>>>> 7959260c851ae3824dd25997cd02132e94a62191
     <form method="POST" action="like_dislike.php" class="mr-3 reaction-form">
         <input type="hidden" name="post_id" value="<?= $post['id'] ?>">
         <button type="submit" name="like" class="reaction-btn like-btn">
@@ -445,6 +458,93 @@ document.querySelectorAll('.reaction-btn').forEach(button => {
 });
 </script>
 
+<<<<<<< HEAD
+             <!-- Display Comments -->
+<h6>Comments (<?= $post['comment_count'] ?>):</h6>
+<div class="comments-section">
+    <?php if(isset($commentError)): ?>
+        <div class="alert alert-danger">
+            <?= htmlspecialchars($commentError) ?>
+        </div>
+    <?php endif; ?>
+    <?php 
+    $comments = $commentController->getCommentsByPostId($post['id']);
+    if (!empty($comments)) : 
+        foreach ($comments as $comment) : ?>
+            <div class="comment mb-2">
+                <p><?= htmlspecialchars($comment->getComment()) ?></p>
+                <form method="POST" action="delete_comment.php" class="d-inline">
+                    <input type="hidden" name="comment_id" value="<?= $comment->getId() ?>">
+                    <a href="deletecomment.php?id=<?= $comment->getId() ?>" 
+                       class="btn btn-danger btn-sm"
+                       onclick="return confirm('Are you sure you want to delete this comment?')">Delete</a>
+                </form>
+                <a href="edit_comment.php?id=<?= $comment->getId() ?>" class="btn btn-warning btn-sm">Edit</a>
+            </div>
+        <?php endforeach; 
+    else : ?>
+        <p>No comments yet. Be the first to comment!</p>
+    <?php endif; ?>
+</div>
+
+<!-- Add New Comment Form -->
+<form method="POST" action="create.php" onsubmit="return validateComment(this)">
+    <input type="hidden" name="post_id" value="<?= $post['id'] ?>">
+    <div class="form-group">
+        <textarea name="comment" class="form-control" rows="2" 
+                  placeholder="Write a comment..." required
+                  maxlength="1000"
+                  oninput="checkComment(this)"></textarea>
+        <small class="text-danger d-none" id="commentError"></small>
+    </div>
+    <button type="submit" class="btn btn-primary btn-sm">Comment</button>
+</form>
+</div>
+</div>
+<?php endforeach; ?>
+<?php else : ?>
+    <div class="alert alert-info">No posts to display yet. Create the first one!</div>
+<?php endif; ?>
+</div>
+</div>
+
+<script>
+function validateComment(form) {
+    const commentText = form.querySelector('textarea[name="comment"]').value.trim();
+    const errorElement = form.querySelector('#commentError');
+    
+    if (commentText === '') {
+        errorElement.textContent = 'Comment cannot be empty!';
+        errorElement.classList.remove('d-none');
+        return false;
+    }
+    
+    // Check for minimum length
+    if (commentText.length < 2) {
+        errorElement.textContent = 'Comment is too short!';
+        errorElement.classList.remove('d-none');
+        return false;
+    }
+    
+    const badWords = ['badword1', 'badword2', 'offensiveWord'];
+    for (const word of badWords) {
+        if (commentText.toLowerCase().includes(word.toLowerCase())) {
+            errorElement.textContent = 'Please keep comments appropriate!';
+            errorElement.classList.remove('d-none');
+            return false;
+        }
+    }
+    
+    return true;
+}
+
+function checkComment(textarea) {
+    const errorElement = textarea.parentElement.querySelector('#commentError');
+    errorElement.classList.add('d-none');
+}
+</script>
+
+=======
                     <!-- Display Comments -->
                     <h6>Comments (<?= $post['comment_count'] ?>):</h6>
                     <div class="comments-section">
@@ -483,6 +583,7 @@ document.querySelectorAll('.reaction-btn').forEach(button => {
     </div>
 </div>
 
+>>>>>>> 7959260c851ae3824dd25997cd02132e94a62191
 
 
 
@@ -497,7 +598,6 @@ document.querySelectorAll('.reaction-btn').forEach(button => {
 
    
 
-<!-- End of Create Post Form -->
 
 
 <script>

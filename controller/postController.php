@@ -31,7 +31,7 @@ class PostController {
         if ($data) {
             return new Post($data['id'], $data['title'], $data['content'], $data['likes'], $data['dislikes']);
         } else {
-            return null;  // Return null if the post is not found
+            return null;  
         }
     }
 
@@ -53,7 +53,7 @@ class PostController {
             return true;  // Post updated successfully
         } catch (PDOException $e) {
             echo "Error updating post: " . $e->getMessage();
-            return false;  // Return false if an error occurred
+            return false;  
         }
     }
 
@@ -62,10 +62,10 @@ class PostController {
         try {
             $stmt = $this->pdo->prepare("DELETE FROM posts WHERE id = :id");
             $stmt->execute(['id' => $id]);
-            return true;  // Post deleted successfully
+            return true;  
         } catch (PDOException $e) {
             echo "Error deleting post: " . $e->getMessage();
-            return false;  // Return false in case of an error
+            return false; 
         }
     }
 
@@ -74,7 +74,11 @@ class PostController {
         try {
             $stmt = $this->pdo->prepare("UPDATE posts SET likes = likes + 1 WHERE id = :id");
             $stmt->execute(['id' => $id]);
+<<<<<<< HEAD
+            return $this->getPost($id); 
+=======
             return $this->getPost($id); // Return the updated post
+>>>>>>> 7959260c851ae3824dd25997cd02132e94a62191
         } catch (PDOException $e) {
             echo "Error liking post: " . $e->getMessage();
             return null;
@@ -86,7 +90,11 @@ class PostController {
         try {
             $stmt = $this->pdo->prepare("UPDATE posts SET dislikes = dislikes + 1 WHERE id = :id");
             $stmt->execute(['id' => $id]);
+<<<<<<< HEAD
+            return $this->getPost($id); 
+=======
             return $this->getPost($id); // Return the updated post
+>>>>>>> 7959260c851ae3824dd25997cd02132e94a62191
         } catch (PDOException $e) {
             echo "Error disliking post: " . $e->getMessage();
             return null;

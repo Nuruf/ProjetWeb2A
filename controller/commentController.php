@@ -1,6 +1,6 @@
 <?php
-require_once 'C:\xampp\htdocs\project\config.php';  // Use require_once to avoid multiple inclusions
-require_once 'C:\xampp\htdocs\project\model\comment.php'; // Include the Comment class correctly
+require_once 'C:\xampp\htdocs\project\config.php'; 
+require_once 'C:\xampp\htdocs\project\model\comment.php'; 
 
 class CommentController {
     private $pdo;
@@ -12,27 +12,34 @@ class CommentController {
     // Create a new comment
     public function createComment($postId, $commentText) {
         try {
+            // Validate the comment text for bad words
+            $comment = new Comment(null, $postId, $commentText); // This will throw exception if bad words found
+
             $stmt = $this->pdo->prepare("INSERT INTO comments (post_id, comment) VALUES (:postId, :comment)");
             $stmt->execute(['postId' => $postId, 'comment' => $commentText]);
-            return new Comment($this->pdo->lastInsertId(), $postId, $commentText);  // Return a Comment object
+
+            return new Comment($this->pdo->lastInsertId(), $postId, $commentText);  
+        } catch (Exception $e) {
+            // If the comment contains bad words, we handle the exception here
+            echo "Error: " . $e->getMessage();
+            return null;  
         } catch (PDOException $e) {
+            // Handle database errors
             echo "Error creating comment: " . $e->getMessage();
-            return null;  // Return null in case of error
+            return null;  
         }
     }
 
-    // Get a specific comment by ID
     public function getComment($id) {
         try {
             $stmt = $this->pdo->prepare("SELECT * FROM comments WHERE id = :id");
             $stmt->execute(['id' => $id]);
             $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            // Check if the comment was found
             if ($data) {
                 return new Comment($data['id'], $data['post_id'], $data['comment']);
             } else {
-                return null;  // Return null if the comment is not found
+                return null;  
             }
         } catch (PDOException $e) {
             echo "Error fetching comment: " . $e->getMessage();
@@ -52,19 +59,28 @@ class CommentController {
             return $comments;
         } catch (PDOException $e) {
             echo "Error fetching comments: " . $e->getMessage();
-            return [];  // Return an empty array in case of error
+            return []; 
         }
     }
 
     // Update a comment
     public function updateComment($id, $commentText) {
         try {
+            // Validate the comment text for bad words
+            $comment = new Comment($id, null, $commentText);
+
             $stmt = $this->pdo->prepare("UPDATE comments SET comment = :comment WHERE id = :id");
             $stmt->execute(['comment' => $commentText, 'id' => $id]);
-            return true;  // Comment updated successfully
+
+            return true;  
+        } catch (Exception $e) {
+            // Handle bad word exception
+            echo "Error: " . $e->getMessage();
+            return false;  // Return false if bad words are found
         } catch (PDOException $e) {
+            // Handle database errors
             echo "Error updating comment: " . $e->getMessage();
-            return false;  // Return false if an error occurred
+            return false;  
         }
     }
 
@@ -76,7 +92,7 @@ class CommentController {
             return true;  // Comment deleted successfully
         } catch (PDOException $e) {
             echo "Error deleting comment: " . $e->getMessage();
-            return false;  // Return false in case of an error
+            return false;  
         }
     }
 }

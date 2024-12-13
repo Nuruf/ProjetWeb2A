@@ -1,13 +1,19 @@
-<?php
+<?php 
 class Comment {
     private $id;
     private $postId;
     private $comment;
 
+    private static $badWords = [
+        'badword1',
+        'badword2'
+        
+    ];
+
     public function __construct($id, $postId, $comment) {
         $this->id = $id;
         $this->postId = $postId;
-        $this->comment = $comment;
+        $this->setComment($comment); // Validate and set comment
     }
 
     // Getter for ID
@@ -30,7 +36,20 @@ class Comment {
     }
 
     public function setComment($comment) {
+        if ($this->containsBadWords($comment)) {
+            throw new Exception("Comment contains inappropriate language");
+        }
         $this->comment = $comment;
+    }
+
+    private function containsBadWords($text) {
+        $text = strtolower($text);
+        foreach (self::$badWords as $badWord) {
+            if (strpos($text, strtolower($badWord)) !== false) {
+                return true;
+            }
+        }
+        return false;
     }
 }
 ?>
