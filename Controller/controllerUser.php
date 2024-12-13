@@ -148,13 +148,13 @@ class CoursController {
     /*page dashboard front */
     public function getUserByIdd($id)
 {
-    $sql = "SELECT * FROM utilisateur WHERE Id = :id"; // Utilisation de paramètre préparé pour sécuriser la requête
+    $sql = "SELECT * FROM utilisateur WHERE Id = :id"; 
     $db = config::getConnexion();
     try {
-        $stmt = $db->prepare($sql); // Préparation de la requête
-        $stmt->bindValue(':id', $id, PDO::PARAM_INT); // Liaison du paramètre `id`
-        $stmt->execute(); // Exécution de la requête
-        $user = $stmt->fetch(PDO::FETCH_ASSOC); // Récupérer un seul utilisateur
+        $stmt = $db->prepare($sql); 
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT); 
+        $stmt->execute(); 
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
         return $user;
     } catch (Exception $e) {
         die('Error:' . $e->getMessage());

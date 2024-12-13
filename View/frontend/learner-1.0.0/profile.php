@@ -98,6 +98,7 @@
 
 include $_SERVER['DOCUMENT_ROOT'] . '/PROJET WEB1/Model/modelUser.php';
 include $_SERVER['DOCUMENT_ROOT'] . '/PROJET WEB1/Controller/controllerUser.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/PROJET WEB1/Controller/metierController.php';
 
 $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 $userController = new CoursController();
@@ -182,7 +183,10 @@ if ($id > 0) {
                 <h1>Profile</h1>
 
 
-                <?php if ($user): ?>
+                <?php
+                  
+                
+                if ($user): ?>
                     <div class="profile-info">
     <p><strong>Nom :</strong> <?= htmlspecialchars($user['Utilisateur']); ?></p>
     <p><strong>Email :</strong> <?= htmlspecialchars($user['Email']); ?></p>
@@ -200,7 +204,20 @@ if ($id > 0) {
                     </form>
 
 </div>
-
+       <!-- Fin des Statistiques -->
+       </table>
+<button onclick="toggleForm()" class="chatbot-toggle-btn">
+    <span class="bot-icon">🤖</span> Parler avec Chatbot
+</button>
+<div id="chatbot-container" style="position: fixed; bottom: 10px; right: 10px; width: 300px; background: #f9f9f9; border: 1px solid #ccc; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+    <div id="chatbot-messages" style="height: 300px; overflow-y: auto; padding: 10px;">
+        <!-- Les messages apparaîtront ici -->
+    </div>
+    <form id="chatbot-form" style="display: flex; border-top: 1px solid #ccc;">
+        <input type="text" id="chatbot-input" placeholder="Posez une question..." style="flex: 1; padding: 10px; border: none; border-radius: 0;">
+        <button type="submit" style="background: #007BFF; color: white; border: none; padding: 10px 15px;">Envoyer</button>
+    </form>
+</div> 
 
 
 
@@ -325,6 +342,92 @@ if ($id > 0) {
       </div>
     </div>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    <script>
+function toggleForm() {
+        const formContainer = document.getElementById('chatbot-container');
+        if (formContainer.style.display === 'none') {
+            formContainer.style.display = 'block';
+        } else {
+            formContainer.style.display = 'none';
+        }
+    }
+
+
+/********************************************************* */
+
+document.addEventListener('DOMContentLoaded', () => {
+        const chatForm = document.getElementById('chatbot-form');
+        const chatInput = document.getElementById('chatbot-input');
+        const chatMessages = document.getElementById('chatbot-messages');
+        chatForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const userMessage = chatInput.value.trim();
+    if (!userMessage) return;
+
+    // Ajouter le message utilisateur à l'interface
+    appendMessage('Vous', userMessage);
+
+    // Envoyer une requête AJAX au serveur
+    try {
+        const response = await fetch('chatbotHandler.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams({ message: userMessage })
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+    
+        appendMessage('Chatbot', data.response);
+    } catch (error) {
+        console.error('Erreur:', error);
+        appendMessage('Erreur', "Une erreur est survenue. Veuillez réessayer.");
+    }
+
+    chatInput.value = '';
+});
+
+
+
+        function appendMessage(sender, message) {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('message');
+            messageElement.innerHTML = `<strong>${sender}:</strong> ${message}`;
+            chatMessages.appendChild(messageElement);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+    });
+
+</script>
     <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>

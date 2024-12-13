@@ -151,7 +151,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['email'], $_GET['passwor
                  <p id="errorMessagePassword" style="color: red;"></p> <!-- Unique ID -->
               </div>
               <div class="col-12 mb-3">
-              <a href=" MotdePasse.php  ">Mot de passe oublié ?</a>
+              <a href=" MotDePasse.php  ">Mot de passe oublié ?</a>
               <a href="http://localhost/PROJET%20WEB1/View/frontend/learner-1.0.0/register.php">Créer un compte</a>
               </div>
          

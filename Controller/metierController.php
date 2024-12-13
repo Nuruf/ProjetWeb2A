@@ -1,14 +1,15 @@
-
 <?php
 include_once __DIR__ . '/../config/config.php'; 
+
+
 class metierController {
     
+  
     public function searchUsers($searchTerm = '') {
         $db = config::getConnexion();
     
-        // Si un terme est saisi, on filtre uniquement par le champ Utilisateur.
         if (!empty($searchTerm)) {
-            $sql = "SELECT Id, Email,MotDePasse, Telephone, Utilisateur, Role 
+            $sql = "SELECT Id, Email, MotDePasse, Telephone, Utilisateur, Role 
                     FROM utilisateur 
                     WHERE Utilisateur LIKE :searchTerm";
         } else {
@@ -19,7 +20,6 @@ class metierController {
         try {
             $query = $db->prepare($sql);
     
-            // Ajoute le paramètre de recherche seulement si un terme est saisi.
             if (!empty($searchTerm)) {
                 $query->execute([
                     'searchTerm' => '%' . $searchTerm . '%'
@@ -36,39 +36,34 @@ class metierController {
             return [];
         }
     }
+
     public function getUsersPercentage() {
         $db = config::getConnexion();
     
         try {
-            // Récupérer tous les utilisateurs
             $sql = "SELECT Role FROM utilisateur";
             $query = $db->prepare($sql);
             $query->execute();
     
-            // Compter le nombre total d'utilisateurs
             $totalUsers = $query->rowCount();
             
             if ($totalUsers == 0) {
                 return "Aucun utilisateur trouvé.";
             }
     
-            // Récupérer le nombre de clients (role = 1)
             $sqlClients = "SELECT COUNT(*) FROM utilisateur WHERE Role = 1";
             $queryClients = $db->prepare($sqlClients);
             $queryClients->execute();
             $clientCount = $queryClients->fetchColumn();
     
-            // Récupérer le nombre d'administrateurs (role = 0)
             $sqlAdmins = "SELECT COUNT(*) FROM utilisateur WHERE Role = 0";
             $queryAdmins = $db->prepare($sqlAdmins);
             $queryAdmins->execute();
             $adminCount = $queryAdmins->fetchColumn();
     
-            // Calculer les pourcentages
             $clientPercentage = ($clientCount / $totalUsers) * 100;
             $adminPercentage = ($adminCount / $totalUsers) * 100;
     
-            // Afficher les résultats
             return [
                 'clientCount' => $clientCount,
                 'adminCount' => $adminCount,
@@ -80,10 +75,51 @@ class metierController {
             return 'Erreur : ' . $e->getMessage();
         }
     }
+
+    public function chatbot($message) {
+        $db = config::getConnexion(); 
     
+        try {
+            $normalizedMessage = $this->normalizeMessage($message);
     
 
+            $sql = "SELECT question, reponse FROM questions_reponses";
+            $query = $db->prepare($sql);
+            $query->execute();
+            $questions = $query->fetchAll(PDO::FETCH_ASSOC);
+    
+ 
+            $keywords = ['gratuit', 'inscrire', 'comment', 'salu', 'quoi'];
+    
+            foreach ($keywords as $keyword) {
+                if (strpos($normalizedMessage, $keyword) !== false) {
+                    // Retourner la réponse en fonction du mot-clé trouvé
+                    foreach ($questions as $q) {
+                        if (strpos(strtolower($q['question']), $keyword) !== false) {
+                            return $q['reponse'];
+                        }
+                    }
+                }
+            }
+    
+            // Si aucune correspondance n'est trouvée, message générique
+            return "Désolé, je ne comprends pas bien. Peut-être reformulez-vous votre question ?";
+        } catch (Exception $e) {
+            // Gestion des erreurs
+            return "Erreur dans la base de données : " . $e->getMessage();
+        }
+    }
+    
+    
+   
+    private function normalizeMessage($message) {
+        // Retirer les caractères inutiles et convertir en minuscule
+        $message = trim($message);
+        $message = preg_replace('/[^a-zA-Z0-9\s]/', '', $message); // Retirer les caractères non-alphanumériques
+        $message = strtolower($message); 
+        return $message;
+    }
+
+    
 }
 ?>
-
-
