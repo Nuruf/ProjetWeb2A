@@ -12,9 +12,9 @@ class PostController {
     // Create a new post
     public function createPost($title, $content) {
         try {
-            $stmt = $this->pdo->prepare("INSERT INTO posts (title, content) VALUES (:title, :content)");
+            $stmt = $this->pdo->prepare("INSERT INTO posts (title, content, likes, dislikes) VALUES (:title, :content, 0, 0)");
             $stmt->execute(['title' => $title, 'content' => $content]);
-            return new Post($this->pdo->lastInsertId(), $title, $content);
+            return new Post($this->pdo->lastInsertId(), $title, $content, 0, 0);
         } catch (PDOException $e) {
             echo "Error creating post: " . $e->getMessage();
             return null;
@@ -29,7 +29,7 @@ class PostController {
 
         // Check if the post was found
         if ($data) {
-            return new Post($data['id'], $data['title'], $data['content']);
+            return new Post($data['id'], $data['title'], $data['content'], $data['likes'], $data['dislikes']);
         } else {
             return null;  // Return null if the post is not found
         }
@@ -40,7 +40,7 @@ class PostController {
         $stmt = $this->pdo->query("SELECT * FROM posts");
         $posts = [];
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            $posts[] = new Post($row['id'], $row['title'], $row['content']);
+            $posts[] = new Post($row['id'], $row['title'], $row['content'], $row['likes'], $row['dislikes']);
         }
         return $posts;
     }
@@ -68,32 +68,66 @@ class PostController {
             return false;  // Return false in case of an error
         }
     }
+
+    // Increment likes for a post
+    public function likePost($id) {
+        try {
+            $stmt = $this->pdo->prepare("UPDATE posts SET likes = likes + 1 WHERE id = :id");
+            $stmt->execute(['id' => $id]);
+            return $this->getPost($id); // Return the updated post
+        } catch (PDOException $e) {
+            echo "Error liking post: " . $e->getMessage();
+            return null;
+        }
+    }
+
+    // Increment dislikes for a post
+    public function dislikePost($id) {
+        try {
+            $stmt = $this->pdo->prepare("UPDATE posts SET dislikes = dislikes + 1 WHERE id = :id");
+            $stmt->execute(['id' => $id]);
+            return $this->getPost($id); // Return the updated post
+        } catch (PDOException $e) {
+            echo "Error disliking post: " . $e->getMessage();
+            return null;
+        }
+    }
+
+    // Get posts sorted by most likes
+    public function getPostsByMostLikes() {
+        $stmt = $this->pdo->query("SELECT * FROM posts ORDER BY likes DESC");
+        $posts = [];
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $posts[] = new Post($row['id'], $row['title'], $row['content'], $row['likes'], $row['dislikes']);
+        }
+        return $posts;
+    }
+
+    // Get recent posts with comment count
     public function getRecentPosts() {
-        // Fetch posts including the created_at field and the comment count
         $stmt = $this->pdo->prepare("
             SELECT p.*, COUNT(c.id) AS comment_count
             FROM posts p
             LEFT JOIN comments c ON p.id = c.post_id
             GROUP BY p.id
-            ORDER BY p.created_at DESC  -- Sort by created_at to get recent posts first
+            ORDER BY p.created_at DESC
         ");
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-public function getPostsByMostComments() {
-    // SQL query to fetch posts ordered by the number of comments
-    $stmt = $this->pdo->prepare("
-        SELECT p.*, COUNT(c.id) AS comment_count
-        FROM posts p
-        LEFT JOIN comments c ON p.id = c.post_id
-        GROUP BY p.id
-        ORDER BY comment_count DESC
-    ");
-    $stmt->execute();
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Get posts by most comments
+    public function getPostsByMostComments() {
+        $stmt = $this->pdo->prepare("
+            SELECT p.*, COUNT(c.id) AS comment_count
+            FROM posts p
+            LEFT JOIN comments c ON p.id = c.post_id
+            GROUP BY p.id
+            ORDER BY comment_count DESC
+        ");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
 
-}
-//ratings
 ?>
-

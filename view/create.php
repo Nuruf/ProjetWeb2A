@@ -167,104 +167,334 @@ if ($sortType === 'recent') {
 
 <!-- HTML for Post Creation and Viewing -->
 <div class="container">
-    <!-- Create Post Section -->
-    <div class="row mb-4">
-        <div class="col-md-8 mx-auto">
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="title">Create Post</h5>
-                </div>
-                <div class="card-body">
-                    <form action="create.php" method="POST" name="postForm" onsubmit="return validatePostForm()">
-                        <div class="form-group">
-                            <label>Title</label>
-                            <input type="text" name="title" class="form-control" required>
-                            <div class="error-message" id="titleError"></div>
-                        </div>
-                        <div class="form-group">
-                            <label>Content</label>
-                            <textarea name="content" class="form-control" rows="5" required></textarea>
-                            <div class="error-message" id="contentError"></div>
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-round">Save</button>
-                    </form>
-                    <?php if (!empty($error)) : ?>
-                        <div class="alert alert-danger mt-3"><?= $error ?></div>
-                    <?php endif; ?>
-                </div>
+
+
+
+
+
+
+
+
+
+
+<div class="row mb-4">
+    <div class="col-md-8 mx-auto">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="title">Create Post</h5>
+            </div>
+            <div class="card-body">
+                <form action="create.php" method="POST" name="postForm" onsubmit="return validatePostForm()">
+                    <div class="form-group">
+                        <label>Title</label>
+                        <input type="text" name="title" class="form-control">
+                        <div class="error-message" id="titleError"></div>
+                    </div>
+                    <div class="form-group">
+                        <label>Content</label>
+                        <textarea name="content" class="form-control" rows="5"></textarea>
+                        <div class="error-message" id="contentError"></div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-round">Save</button>
+                </form>
+                <?php if (!empty($error)) : ?>
+                    <div class="alert alert-danger mt-3"><?= $error ?></div>
+                <?php endif; ?>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Dropdown for Sorting Posts -->
-    <div class="row mb-4">
-        <div class="col-md-8 mx-auto">
-            <form method="GET" action="create.php">
-              <h1>POSTS</h1>
-                <label for="sort_type">Sort Posts By:</label>
-                <select name="sort_type" id="sort_type" class="form-control" onchange="this.form.submit()">
-                    <option value="recent" <?= $sortType === 'recent' ? 'selected' : '' ?>>Recent Posts</option>
-                    <option value="popular" <?= $sortType === 'popular' ? 'selected' : '' ?>>Most Popular (By Comments)</option>
-                </select>
-            </form>
-        </div>
-    </div>
-
-    <!-- Display Posts Based on Selected Sort Type -->
-    <div class="row mb-4">
-        <div class="col-md-8 mx-auto">
-            <?php if (!empty($getPosts)) :
-                foreach ($getPosts as $post) :
-            ?>
-                    <div class="card mb-3">
-                        <div class="card-header">
-                            <h6><?= htmlspecialchars($post['title']) ?></h6>
-                        </div>
-                        <div class="card-body">
-                            <p><?= nl2br(htmlspecialchars($post['content'])) ?></p>
-                            <!-- Edit Button -->
-                            <a href="edit.php?id=<?= $post['id'] ?>" class="btn btn-primary">Edit</a>
-                        </div>
-                        <div class="card-footer">
-                            <!-- Display Comments -->
-                            <h6>Comments (<?= $post['comment_count'] ?>):</h6>
-                            <div class="comments-section">
-                                <?php 
-                                $comments = $commentController->getCommentsByPostId($post['id']);
-                                if (!empty($comments)) : 
-                                    foreach ($comments as $comment) : ?>
-                                        <div class="comment mb-2">
-                                            <p><?= htmlspecialchars($comment->getComment()) ?></p>
-                                            <form method="POST" action="delete_comment.php" class="d-inline">
-                                                <input type="hidden" name="comment_id" value="<?= $comment->getId() ?>">
-                                                <a href="deletecomment.php?id=<?= $comment->getId() ?>" class="btn btn-danger btn-sm">Delete</a>
-                                            </form>
-                                            <a href="edit_comment.php?id=<?= $comment->getId() ?>" class="btn btn-warning btn-sm">Edit</a>
-                                        </div>
-                                    <?php endforeach; 
-                                else : ?>
-                                    <p>No comments yet. Be the first to comment!</p>
-                                <?php endif; ?>
-                            </div>
-
-                            <!-- Add New Comment Form -->
-                            <form method="POST" action="create.php">
-                                <input type="hidden" name="post_id" value="<?= $post['id'] ?>">
-                                <div class="form-group">
-                                    <textarea name="comment" class="form-control" rows="2" placeholder="Write a comment..." required></textarea>
-                                </div>
-                                <button type="submit" class="btn btn-primary btn-sm">Comment</button>
-                            </form>
-                        </div>
-                    </div>
-                <?php endforeach; ?>
-            <?php else : ?>
-                <div class="alert alert-info">No posts to display yet. Create the first one!</div>
-            <?php endif; ?>
-        </div>
+<!-- Dropdown for Sorting Posts -->
+<div class="row mb-4">
+    <div class="col-md-8 mx-auto">
+        <form method="GET" action="create.php">
+            <h1>POSTS</h1>
+            <label for="sort_type">Sort Posts By:</label>
+            <select name="sort_type" id="sort_type" class="form-control" onchange="this.form.submit()">
+                <option value="recent" <?= $sortType === 'recent' ? 'selected' : '' ?>>Recent Posts</option>
+                <option value="popular" <?= $sortType === 'popular' ? 'selected' : '' ?>>Most Popular (By Comments)</option>
+            </select>
+        </form>
     </div>
 </div>
-//ratings
+
+<!-- Display Posts Based on Selected Sort Type -->
+<div class="row mb-4">
+    <div class="col-md-8 mx-auto">
+        <?php if (!empty($getPosts)) :
+            foreach ($getPosts as $post) :
+        ?>
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h6><?= htmlspecialchars($post['title']) ?></h6>
+                </div>
+                <div class="card-body">
+                    <p><?= nl2br(htmlspecialchars($post['content'])) ?></p>
+                    <!-- Edit Button -->
+                    <a href="edit.php?id=<?= $post['id'] ?>" class="btn btn-primary">Edit</a>
+                </div>
+                <div class="card-footer">
+                    <!-- Like/Dislike Buttons -->
+                    <div class="d-flex align-items-center reaction-container">
+    <form method="POST" action="like_dislike.php" class="mr-3 reaction-form">
+        <input type="hidden" name="post_id" value="<?= $post['id'] ?>">
+        <button type="submit" name="like" class="reaction-btn like-btn">
+            <div class="thumb-wrapper">
+                <svg class="thumb" viewBox="0 0 24 24" width="24" height="24">
+                    <path class="thumb-path" d="M2,20V12C2,11.4 2.2,11 2.6,10.6C3,10.2 3.4,10 4,10H8V4C8,3.4 8.2,3 8.6,2.6C9,2.2 9.4,2 10,2H12C12.6,2 13,2.2 13.4,2.6C13.8,3 14,3.4 14,4V10L19,10C19.4,10 19.8,10.2 20.2,10.6C20.6,11 20.8,11.4 20.8,12L19,20C18.8,20.6 18.6,21 18.2,21.4C17.8,21.8 17.4,22 17,22H5C4.4,22 3.8,21.8 3.4,21.4C3,21 2.6,20.6 2,20Z" />
+                </svg>
+                <div class="particle-burst">
+                    <div class="particle"></div>
+                    <div class="particle"></div>
+                    <div class="particle"></div>
+                    <div class="particle"></div>
+                    <div class="particle"></div>
+                </div>
+            </div>
+            <span class="reaction-count"><?= $post['likes'] ?? 0 ?></span>
+        </button>
+    </form>
+    
+    <form method="POST" action="like_dislike.php" class="reaction-form">
+        <input type="hidden" name="post_id" value="<?= $post['id'] ?>">
+        <button type="submit" name="dislike" class="reaction-btn dislike-btn">
+            <div class="thumb-wrapper">
+                <svg class="thumb" viewBox="0 0 24 24" width="24" height="24">
+                    <path class="thumb-path" d="M22,4V12C22,12.6 21.8,13 21.4,13.4C21,13.8 20.6,14 20,14H16V20C16,20.6 15.8,21 15.4,21.4C15,21.8 14.6,22 14,22H12C11.4,22 11,21.8 10.6,21.4C10.2,21 10,20.6 10,20V14L5,14C4.6,14 4.2,13.8 3.8,13.4C3.4,13 3.2,12.6 3.2,12L5,4C5.2,3.4 5.4,3 5.8,2.6C6.2,2.2 6.6,2 7,2H19C19.6,2 20.2,2.2 20.6,2.6C21,3 21.4,3.4 22,4Z" />
+                </svg>
+                <div class="particle-burst">
+                    <div class="particle"></div>
+                    <div class="particle"></div>
+                    <div class="particle"></div>
+                    <div class="particle"></div>
+                    <div class="particle"></div>
+                </div>
+            </div>
+            <span class="reaction-count"><?= $post['dislikes'] ?? 0 ?></span>
+        </button>
+    </form>
+</div>
+
+<style>
+.reaction-container {
+    display: flex;
+    gap: 20px;
+    padding: 12px;
+}
+
+.reaction-form {
+    margin: 0;
+}
+
+.reaction-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.like-btn {
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+    color: white;
+}
+
+.dislike-btn {
+    background: linear-gradient(135deg, #f44336, #e53935);
+    color: white;
+}
+
+.thumb-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.thumb {
+    width: 24px;
+    height: 24px;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.thumb-path {
+    fill: currentColor;
+}
+
+.reaction-count {
+    font-weight: 700;
+    font-size: 16px;
+    min-width: 24px;
+    text-align: center;
+}
+
+/* Hover Effects */
+.reaction-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+.reaction-btn:hover .thumb {
+    transform: scale(1.2);
+}
+
+/* Active Animation */
+.reaction-btn:active {
+    transform: translateY(1px);
+}
+
+/* Particle Animation */
+.particle-burst {
+    position: absolute;
+    display: none;
+    width: 100%;
+    height: 100%;
+}
+
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: currentColor;
+    opacity: 0;
+}
+
+.reaction-btn:active .particle-burst {
+    display: block;
+}
+
+.reaction-btn:active .particle {
+    animation: particle-burst 0.6s ease-out forwards;
+}
+
+@keyframes particle-burst {
+    0% {
+        transform: translate(0, 0);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(var(--x, 50px), var(--y, 50px));
+        opacity: 0;
+    }
+}
+
+/* Particle Positions */
+.particle:nth-child(1) { --x: 20px; --y: -20px; }
+.particle:nth-child(2) { --x: -20px; --y: -20px; }
+.particle:nth-child(3) { --x: 20px; --y: 20px; }
+.particle:nth-child(4) { --x: -20px; --y: 20px; }
+.particle:nth-child(5) { --x: 0px; --y: -30px; }
+
+/* Glassmorphism effect */
+.reaction-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.1),
+        rgba(255, 255, 255, 0.2)
+    );
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.reaction-btn:hover::before {
+    opacity: 1;
+}
+
+/* Pulse Animation on Count Change */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+.reaction-count.animate {
+    animation: pulse 0.3s ease-out;
+}
+</style>
+
+<script>
+document.querySelectorAll('.reaction-btn').forEach(button => {
+    button.addEventListener('click', function(e) {
+        // Create particles
+        const particles = this.querySelectorAll('.particle');
+        particles.forEach(particle => {
+            particle.style.animation = 'none';
+            particle.offsetHeight; // Trigger reflow
+            particle.style.animation = null;
+        });
+
+        // Animate count
+        const count = this.querySelector('.reaction-count');
+        count.classList.add('animate');
+        setTimeout(() => count.classList.remove('animate'), 300);
+    });
+});
+</script>
+
+                    <!-- Display Comments -->
+                    <h6>Comments (<?= $post['comment_count'] ?>):</h6>
+                    <div class="comments-section">
+                        <?php 
+                        $comments = $commentController->getCommentsByPostId($post['id']);
+                        if (!empty($comments)) : 
+                            foreach ($comments as $comment) : ?>
+                                <div class="comment mb-2">
+                                    <p><?= htmlspecialchars($comment->getComment()) ?></p>
+                                    <form method="POST" action="delete_comment.php" class="d-inline">
+                                        <input type="hidden" name="comment_id" value="<?= $comment->getId() ?>">
+                                        <a href="deletecomment.php?id=<?= $comment->getId() ?>" class="btn btn-danger btn-sm">Delete</a>
+                                    </form>
+                                    <a href="edit_comment.php?id=<?= $comment->getId() ?>" class="btn btn-warning btn-sm">Edit</a>
+                                </div>
+                            <?php endforeach; 
+                        else : ?>
+                            <p>No comments yet. Be the first to comment!</p>
+                        <?php endif; ?>
+                    </div>
+
+                    <!-- Add New Comment Form -->
+                    <form method="POST" action="create.php">
+                        <input type="hidden" name="post_id" value="<?= $post['id'] ?>">
+                        <div class="form-group">
+                            <textarea name="comment" class="form-control" rows="2" placeholder="Write a comment..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-sm">Comment</button>
+                    </form>
+                </div>
+            </div>
+        <?php endforeach; ?>
+        <?php else : ?>
+            <div class="alert alert-info">No posts to display yet. Create the first one!</div>
+        <?php endif; ?>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
    
 
 <!-- End of Create Post Form -->

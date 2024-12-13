@@ -91,11 +91,11 @@ $tab = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                         <?php foreach ($comments as $comment): ?>
                                             <li class="list-group-item">
                                                 <p><?= htmlspecialchars($comment['comment']); ?></p>
-                                                <form method="POST" action="../view/deletecomment.php" class="d-inline">
-                                                    <input type="hidden" name="comment_id" value="<?= $comment['id']; ?>">
+                                                <form method="GET" action="../view/deletecomment2.php" class="d-inline">
+                                                    <input type="hidden" name="id" value="<?= $comment['id']; ?>">
                                                     <button type="submit" class="btn btn-danger btn-sm">
-                                                        Delete Comment
-                                                    </button>
+                                                     Delete Comment
+                                                     </button>
                                                 </form>
                                             </li>
                                         <?php endforeach; ?>
@@ -106,7 +106,7 @@ $tab = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             </div>
                         </td>
                     </tr>
-                    //rating 
+                   
                 <?php endforeach; ?>
             </tbody>
         </table>

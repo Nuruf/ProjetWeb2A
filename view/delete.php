@@ -16,7 +16,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         // If the post exists, delete it
         $controller->deletePost($id);
         // Redirect after deletion
-        header("Location: index.php");
+        header("Location: back.php");
         exit;
     } else {
         // Post not found
