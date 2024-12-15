@@ -3,14 +3,13 @@ class contenu{
  private ?int $idContenu;
  private ?string $nomContenu;
  private ?string $descriptionContenu;
- 
- //private string $idCat;
+ private ?int $idCat;
 
- public function __construct($idContenu,$nomContenu,$descriptionContenu){
+ public function __construct($idContenu,$nomContenu,$descriptionContenu,$idCat){
     $this->idContenu=$idContenu;
     $this->nomContenu=$nomContenu;
     $this->descriptionContenu=$descriptionContenu;
-    //$this->idCat=$idCat;
+    $this->idCat=$idCat;
  }
 
 
@@ -38,12 +37,12 @@ class contenu{
   $this->descriptionContenu = $descriptionContenu;
  }
 
-/* public function getIdCat(){
+ public function getIdCat(){
     return $this->idCat;
    }
   
  public function setIdCat($idCat){
     $this->idCat = $idCat;
- }*/
+ }
 }
 ?>

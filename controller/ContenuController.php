@@ -1,6 +1,6 @@
 <?php
-require_once(__DIR__ . '/../config.php');
 include(__DIR__ . '/../model/contenu.php');
+include '../../controller/CategoryController.php';
 
 class contenuController
 {
@@ -34,50 +34,69 @@ class contenuController
     }
 
     // Add a new contenu
-    function addContenu($contenu)
+        // Ajouter un contenu avec la clé étrangère
+        function addContenu($contenu,$idCat)
+        {
+            $sql = "INSERT INTO contenu (nomContenu, descriptionContenu, idCat) VALUES (:nomContenu, :descriptionContenu, :idCat)";
+            $db = config::getConnexion();
+            try {
+                $query = $db->prepare($sql);
+                $query->execute([
+                    'nomContenu' => $contenu->getNomContenu(),
+                    'descriptionContenu' => $contenu->getDescriptionContenu(),
+                    'idCat' => $idCat
+                ]);
+            } catch (Exception $e) {
+                echo 'Error: ' . $e->getMessage();
+            }
+        }
+    
+        // Mettre à jour un contenu avec la clé étrangère
+        function updateContenu($contenu, $idContenu)
+        {
+            try {
+                $db = config::getConnexion();
+    
+                $query = $db->prepare(
+                    'UPDATE contenu SET 
+                        nomContenu = :nomContenu,
+                        descriptionContenu = :descriptionContenu,
+                        idCat = :idCat
+                    WHERE idContenu = :idContenu' 
+                );
+    
+                $query->execute([
+                    'idContenu' => $idContenu,
+                    'nomContenu' => $contenu->getNomContenu(),
+                    'descriptionContenu' => $contenu->getDescriptionContenu(),
+                    'idCat' => $contenu->getIdCat() // Mettre à jour la référence catégorie
+                ]);
+    
+                echo $query->rowCount() . " contenu(s) mis à jour avec succès <br>";
+            } catch (PDOException $e) {
+                echo "Error: " . $e->getMessage(); 
+            }
+        }
+
+    // Show a single contenu by idCat
+    public function listContenuByIdCat($idCat)
     {
-        $sql = "INSERT INTO contenu (nomContenu, descriptionContenu) VALUES (:nomContenu, :descriptionContenu)";
+        $sql = "SELECT * FROM contenu WHERE idCat = :idCat"; 
         $db = config::getConnexion();
         try {
             $query = $db->prepare($sql);
-            $query->execute([
-                'nomContenu' => $contenu->getNomContenu(),
-                'descriptionContenu' => $contenu->getDescriptionContenu()
-            ]);
+            $query->bindValue(':idCat', $idCat);
+            $query->execute();
+            return $query->fetchAll(); // Fetch all content for the specific category
         } catch (Exception $e) {
-            echo 'Error: ' . $e->getMessage();
-        }
-    }
-
-    // Update an existing contenu
-    function updateContenu($contenu, $idContenu)
-    {
-        try {
-            $db = config::getConnexion();
-
-            $query = $db->prepare(
-                'UPDATE contenu SET 
-                    nomContenu = :nomContenu,
-                    descriptionContenu = :descriptionContenu
-                WHERE idContenu = :idContenu' 
-            );
-
-            $query->execute([
-                'idContenu' => $idContenu,
-                'nomContenu' => $contenu->getNomContenu(),
-                'descriptionContenu' => $contenu->getDescriptionContenu()
-            ]);
-
-            echo $query->rowCount() . " records UPDATED successfully <br>";
-        } catch (PDOException $e) {
-            echo "Error: " . $e->getMessage(); 
+            die('Error: ' . $e->getMessage());
         }
     }
 
     // Show a single contenu by ID
-    function showContenu($idContenu)
+    function showContenuById($idContenu)
     {
-        $sql = "SELECT * FROM contenu WHERE idContenu = :idContenu"; 
+        $sql = "SELECT * FROM contenu WHERE idContenu = :idContenu";
         $db = config::getConnexion();
         try {
             $query = $db->prepare($sql);
