@@ -80,12 +80,12 @@
             <li class="active"><a href="index.php">Home</a></li>
             
             </li>
-            <li ><a href="profile.html">Profile</a></li>
-            <li><a href="forum.html">Forum</a></li>
-            <li><a href="skillswap.html">SKILL SWAP</a></li>
-            <li><a href="blog.html">Blog</a></li>
-            <li><a href="quiz.html">Quiz</a></li>
-            <li><a href="reclamation.html">Reclamation</a></li>
+            <li ><a href="profile.php">Profile</a></li>
+            <li><a href="forum.php">Forum</a></li>
+            <li><a href="skillswap.php">SKILL SWAP</a></li>
+            <li><a href="blog.php">Blog</a></li>
+            <li><a href="quiz.php">Quiz</a></li>
+            <li><a href="reclamation.php">Reclamation</a></li>
           </ul>
 
           <a href="#" class="btn-book btn btn-secondary btn-sm menu-absolute">Enroll Now</a>
