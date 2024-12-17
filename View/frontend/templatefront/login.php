@@ -4,8 +4,38 @@
 * Tempalte URI: https://untree.co/
 * License: https://creativecommons.org/licenses/by/3.0/
 */ -->
-<!DOCTYPE html>
-<html lang="en">.
+<?php
+include $_SERVER['DOCUMENT_ROOT'] . '/PROJET WEB1/Controller/controllerUser.php';
+
+// Vérifiez si le formulaire a été soumis
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['email'], $_GET['password'])) {
+    $email = $_GET['email'];
+    $password = $_GET['password'];
+
+    $userController = new CoursController();
+    $user = $userController->checkUser($email, $password);
+
+    if (is_array($user)) {
+        // Si les informations d'identification sont correctes
+        if ($user['Role'] == 0) {
+            // Rediriger vers le tableau de bord admin
+            echo "<script>alert('connexion réussi page admin.');</script>";
+            header('Location: /PROJET%20WEB1/View/Backoffice/dashboard backoffice.php?id=' . urlencode($user['Id'])  );
+            exit;
+        } elseif ($user['Role'] == 1) {
+            // Rediriger vers le tableau de bord utilisateur
+            echo "<script>alert('correction reussi .');</script>";
+            header('Location: ../../frontend\templatefront\profile.php?id=' . urlencode($user['Id']) );
+            exit;
+        }
+    } else {
+
+        echo "<script>alert('Email ou mot de passe incorrect.');</script>";
+    }
+}
+?>
+<!doctype php>
+<php lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -55,19 +85,10 @@
             <a href="#" class="small mr-3"><span class="icon-question-circle-o mr-2"></span> <span class="d-none d-lg-inline-block">Have a questions?</span></a> 
             <a href="#" class="small mr-3"><span class="icon-phone mr-2"></span> <span class="d-none d-lg-inline-block">10 20 123 456</span></a> 
             <a href="#" class="small mr-3"><span class="icon-envelope mr-2"></span> <span class="d-none d-lg-inline-block">info@mydomain.com</span></a> 
-            <a href="http://localhost/PROJET%20WEB1/View/frontend/learner-1.0.0/index.php"class="small mr-3"><span class="d-none d-lg-inline-block">page principale</span></a> 
+            <a href="http://localhost/PROJET%20WEB1/View/frontend/templatefront/index.php"class="small mr-3"><span class="d-none d-lg-inline-block">page principale</span></a> 
           </div>
 
-          <div class="col-6 col-lg-3 text-right">
-            <a href="login.php" class="small mr-3">
-              <span class="icon-lock"></span>
-              Log In
-            </a>
-            <a href="register.php" class="small">
-              <span class="icon-person"></span>
-              Register
-            </a>
-          </div>
+
 
         </div>
       </div>
@@ -77,7 +98,7 @@
         <div class="site-navigation text-center">
           <a href="index.php" class="logo menu-absolute m-0">Learner<span class="text-primary">.</span></a>
 
-
+       
 
           <a href="#" class="btn-book btn btn-secondary btn-sm menu-absolute">Enroll Now</a>
 
@@ -97,7 +118,7 @@
         <div class="col-12">
           <div class="row justify-content-center ">
             <div class="col-lg-6 text-center ">
-              <h1 class="mb-4 heading text-white" data-aos="fade-up" data-aos-delay="100">Register</h1>
+              <h1 class="mb-4 heading text-white" data-aos="fade-up" data-aos-delay="100">Login</h1>
 
             </div>
           </div>
@@ -115,17 +136,10 @@
 
       <div class="row mb-5 justify-content-center">
         <div class="col-lg-5 mx-auto order-1" data-aos="fade-up" data-aos-delay="200">
-          <form class="form-box" onsubmit="return validateForm()" method="POST">
+          <form  class="form-box">
             <div class="row">
-              <div class="col-12 mb-3">
-
-              <label for="username">Nom d'utilisateur</label>
-                <input type="text" class="form-control" id="username" name="utilisateur" placeholder="Entrez votre nom">
-                <p id="errorMessageUsername" style="color: red;"></p> <!-- Unique ID -->
-              </div>
-
-
-              <div class="col-12 mb-3">
+             
+            <div class="col-12 mb-3">
                 <label for="email">Email</label>
                 <input type="text" class="form-control" id="email" name="email" placeholder=" entrez votre Email">
                 <p id="errorMessageEmail" style="color: red;"></p> <!-- Unique ID -->
@@ -133,34 +147,17 @@
 
               <div class="col-12 mb-3">
                  <label for="password">Mot de passe</label>
-                 <input type="password" class="form-control" id="password" name ="motdepasse" placeholder="Donner votre mot de passe">
+                 <input type="password" class="form-control" id="password" name ="password" placeholder="Donner votre mot de passe">
                  <p id="errorMessagePassword" style="color: red;"></p> <!-- Unique ID -->
               </div>
-
               <div class="col-12 mb-3">
-                <label for="confirm-password">Confirmez le mot de passe</label>
-                <input type="password"  id="confirm-password"  class="form-control" placeholder="Retapez le mot de passe">
-                <p id="errorMessageConfirmPassword" style="color: red;"></p> <!-- Unique ID -->
+              <a href=" MotDePasse.php  ">Mot de passe oublié ?</a>
+              <a href="http://localhost/PROJET%20WEB1/View/frontend/templatefront/register.php">Créer un compte</a>
               </div>
-
-
-              <div class="col-12 mb-3">
-                 <label for="password">Telephone</label>
-                 <input type="tel" class="form-control"  id="telephone" name="telephone"  placeholder="Donner votre mot de passe">
-                 <p id="errorMessageTelephone" style="color: red;"></p> <!-- Unique ID -->
-              </div>
-
-
-              <div class="col-12 mb-3">
-                     <input type="radio" name="role" value="0"> Admin
-                    <input type="radio" name="role" value="1"> Client
-              
-                <p id="errorMessageRole" style="color: red;"></p> <!-- Unique ID -->
-              </div>
-
+         
 
               <div class="col-12">
-                <input type="submit"  class="btn btn-primary">
+                <input type="submit" value="connexion" class="btn btn-primary">
               </div>
             </div>
           </form>
@@ -169,40 +166,6 @@
 
       
     </div>
-      <!--******************************************************************************--->
-      <?php
-include $_SERVER['DOCUMENT_ROOT'] . '/PROJET WEB1/Model/modelUser.php';
-include $_SERVER['DOCUMENT_ROOT'] . '/PROJET WEB1/Controller/controllerUser.php';
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Récupérer les données du formulaire
-    $email = $_POST['email'];
-    $motdepasse = $_POST['motdepasse'];
-    $telephone = $_POST['telephone'];
-    $utilisateur = $_POST['utilisateur'];
-    $role = $_POST['role'];
-
-    // Créer un objet Utilisateur avec les données récupérées
-    $user1 = new User( $utilisateur,$email, $motdepasse, $telephone, $role);
-
-    // Créer une instance du contrôleur Utilisateur
-    $v1 = new CoursController ();
-
-    // Appeler la méthode pour ajouter l'utilisateur
-    try {
-        $v1->addUser($user1);
-      
-    } catch (Exception $e) {
-        echo 'Erreur : ' . $e->getMessage();
-    }
-}
-
-?>
-
-
-
-
-        <!--*********************************-->
   </div> <!-- /.untree_co-section -->
 
   <div class="site-footer">
@@ -234,7 +197,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <h3>Projects</h3>
             <ul class="list-unstyled float-left links">
               <li><a href="#">Web Design</a></li>
-              <li><a href="#">php5</a></li>
+              <li><a href="#">HTML5</a></li>
               <li><a href="#">CSS3</a></li>
               <li><a href="#">jQuery</a></li>
               <li><a href="#">Bootstrap</a></li>
@@ -291,74 +254,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <span class="sr-only">Loading...</span>
       </div>
     </div>
-  
     <script>
     function validateForm() {
-        const username = document.getElementById('username').value.trim();
-        const email = document.getElementById('email').value.trim();
-        const password = document.getElementById('password').value.trim();
-        const confirmPassword = document.getElementById('confirm-password').value.trim();
-        const telephone = document.getElementById('telephone').value.trim();
-        const errorMessageUsername = document.getElementById('errorMessageUsername');
-        const errorMessageEmail = document.getElementById('errorMessageEmail');
-        const errorMessagePassword = document.getElementById('errorMessagePassword');
-        const errorMessageConfirmPassword = document.getElementById('errorMessageConfirmPassword');
-        const errorMessageTelephone = document.getElementById('errorMessageTelephone');
-        const errorMessageRole = document.getElementById('errorMessageRole');
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const errorMessage = document.getElementById('errorMessage');
+        const errorMessage2 = document.getElementById('errorMessage2');
 
         // Effacer les messages d'erreur précédents
-        errorMessageUsername.textContent = '';
-        errorMessageEmail.textContent = '';
-        errorMessagePassword.textContent = '';
-        errorMessageConfirmPassword.textContent = '';
-        errorMessageTelephone.textContent = '';
-        errorMessageRole.textContent = '';
+        errorMessage.textContent = '';
+        errorMessage2.textContent = '';
 
-        // Validation des champs requis
-        if (username === '' || email === '' || password === '' || confirmPassword === '' || telephone === '') {
-            if (username === '') {
-                errorMessageUsername.textContent = 'Veuillez entrer votre nom';
-            }
-            if (email === '') {
-                errorMessageEmail.textContent = 'Veuillez entrer votre email';
-            }
-            if (password === '') {
-                errorMessagePassword.textContent = 'Veuillez entrer votre mot de passe';
-            }
-            if (confirmPassword === '') {
-                errorMessageConfirmPassword.textContent = 'Veuillez confirmer votre mot de passe';
-            }
-            if (telephone === '') {
-                errorMessageTelephone.textContent = 'Veuillez entrer votre numéro de téléphone';
-            }
-            
-            const roleSelected = document.querySelector('input[name="role"]:checked');
-            if (!roleSelected) {
-            errorMessageRole.textContent = 'Veuillez choisir un rôle (Admin ou Client)';
-        
-        }
-        return false;
-        }
-
-        // Validation si les mots de passe correspondent
-        if (password !== confirmPassword) {
-            errorMessageConfirmPassword.textContent = 'Les mots de passe ne correspondent pas';
+        if (email === '' && password === '') {
+            errorMessage.textContent = 'Veuillez entrer votre email.';
+            errorMessage2.textContent = 'Veuillez entrer votre mot de passe.';
             return false;
         }
 
-     
+        if (email === '') {
+            errorMessage.textContent = 'Veuillez entrer votre email.';
+            return false; // Empêche l'envoi du formulaire
+        }
 
-        // Validation du téléphone (vérification d'un format simple de numéro de téléphone)
-        const phonePattern = /^[0-9]{8}$/;  // Exemple de format de numéro de téléphone (10 chiffres)
-        if (!phonePattern.test(telephone)) {
-            errorMessageTelephone.textContent = 'Veuillez entrer un numéro de téléphone valide (8 chiffres)';
+        if (password === '') {
+            errorMessage2.textContent = 'Veuillez entrer votre mot de passe.';
             return false;
         }
 
-        return true; // Si tout est valide, le formulaire peut être soumis
+        return true;
     }
 </script>
-
     <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
@@ -371,5 +296,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <script src="js/custom.js"></script>
 
   </body>
- 
-  </html>
+
+  </php>

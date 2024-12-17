@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['name'], $_POST['motdep
     $utilisateursController->updateUser($utilisateur1, $utilisateur1Id);
 
     // Redirection vers le tableau de bord avec l'ID de l'utilisateur dans l'URL
-      header('Location: ../../frontend\learner-1.0.0\profile.php?id=' . urlencode($utilisateur1Id) );
+      header('Location: ../../frontend\templatefront\profile.php?id=' . urlencode($utilisateur1Id) );
     exit();
 }
 ?>
