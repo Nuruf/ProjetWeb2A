@@ -10,20 +10,30 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/PROJET WEB1/Model/modelUser.php');
 
 $utilisateur1 = null;
 
+
+session_start();
+
+// Vérifiez si l'utilisateur est connecté
+if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] != 1) {
+    // Rediriger vers la page de connexion si non connecté ou rôle incorrect
+   header('Location: ../../frontend/templatefront/index.php');
+    exit;
+}
+$pp=$_SESSION['user_id'];
+
 // Récupérer l'ID de l'utilisateur à modifier depuis l'URL
-if (isset($_GET['id'])) {
-    $utilisateur1Id = $_GET['id'];
+
+    $utilisateur1Id =$pp;
 
     $utilisateursController = new CoursController();
     $utilisateur1 = $utilisateursController->getUserById($utilisateur1Id);
-}
+
 
 // Si l'utilisateur n'existe pas, afficher un message d'erreur
 if ($utilisateur1 === null) {
     echo "L'utilisateur demandé n'existe pas.";
     exit();
 }
-
 // Si le formulaire est soumis (méthode POST)
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['name'], $_POST['motdepasse'], $_POST['email'], $_POST['phone'], $_POST['role'])) {
   
@@ -41,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['name'], $_POST['motdep
     $utilisateursController->updateUser($utilisateur1, $utilisateur1Id);
 
     // Redirection vers le tableau de bord avec l'ID de l'utilisateur dans l'URL
-      header('Location: ../../frontend\templatefront\profile.php?id=' . urlencode($utilisateur1Id) );
+      header('Location: ../../frontend\templatefront\profile.php' );
     exit();
 }
 ?>

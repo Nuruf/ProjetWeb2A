@@ -8,20 +8,29 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+
+<?php
+session_start();
+
+// Vérifiez si l'utilisateur est connecté
+if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] != 0) {
+    // Rediriger vers la page de connexion si non connecté ou rôle incorrect
+   header('Location: ../../frontend/templatefront/index.php');
+    exit;
+}
+$pp=$_SESSION['user_id'];
+?>
 <?php
     include $_SERVER['DOCUMENT_ROOT'] . '/PROJET WEB1/Model/modelUser.php';
     include $_SERVER['DOCUMENT_ROOT'] . '/PROJET WEB1/Controller/controllerUser.php';
 
     // Récupération des paramètres GET
-    $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+   
     $userController = new CoursController();
 
-    // Récupérer l'utilisateur si un ID est présent
-    if ($id > 0) {
-        $user = $userController->getUserByIdd($id);
-    } else {
-        $user = null;
-    }
+  
+        $user = $userController->getUserByIdd($pp);
+  
 ?>
     <!-- Barre latérale -->
     <aside class="sidebar">
@@ -45,7 +54,7 @@
     <main class="main-content">
         <header class="user-info">
             <span>Bienvenue      <?= htmlspecialchars($user['Utilisateur'] ?? ''); ?> </span>
-            <a href="http://localhost/PROJET%20WEB1/View/frontend/learner-1.0.0/login.php">
+            <a href="http://localhost/PROJET%20WEB1/View/frontend/templatefront/login.php">
                 <button class="logout-btn">
                     <i class="fas fa-sign-out-alt"></i> Déconnexion
                 </button>

@@ -5,6 +5,8 @@
 * License: https://creativecommons.org/licenses/by/3.0/
 */ -->
 <?php
+session_start(); // Démarrer la session au début du fichier
+
 include $_SERVER['DOCUMENT_ROOT'] . '/PROJET WEB1/Controller/controllerUser.php';
 
 // Vérifiez si le formulaire a été soumis
@@ -17,23 +19,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['email'], $_GET['passwor
 
     if (is_array($user)) {
         // Si les informations d'identification sont correctes
+        $_SESSION['user_id'] = $user['Id']; // Stocker l'ID dans la session
+        $_SESSION['user_role'] = $user['Role']; // Stocker le rôle dans la session
+        $_SESSION['user_email'] = $user['Email']; // Stocker l'email (optionnel)
+
         if ($user['Role'] == 0) {
             // Rediriger vers le tableau de bord admin
-            echo "<script>alert('connexion réussi page admin.');</script>";
-            header('Location: /PROJET%20WEB1/View/Backoffice/dashboard backoffice.php?id=' . urlencode($user['Id'])  );
+            echo "<script>alert('Connexion réussie - Page Admin.');</script>";
+            header('Location: /PROJET%20WEB1/View/BackOffice/dashboard backoffice.php');
             exit;
         } elseif ($user['Role'] == 1) {
             // Rediriger vers le tableau de bord utilisateur
-            echo "<script>alert('correction reussi .');</script>";
-            header('Location: ../../frontend\templatefront\profile.php?id=' . urlencode($user['Id']) );
+            echo "<script>alert('Connexion réussie.');</script>";
+            header('Location: ../../frontend/templatefront/profile.php');
             exit;
         }
     } else {
-
         echo "<script>alert('Email ou mot de passe incorrect.');</script>";
     }
 }
 ?>
+
 <!doctype php>
 <php lang="en">
 <head>
@@ -85,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['email'], $_GET['passwor
             <a href="#" class="small mr-3"><span class="icon-question-circle-o mr-2"></span> <span class="d-none d-lg-inline-block">Have a questions?</span></a> 
             <a href="#" class="small mr-3"><span class="icon-phone mr-2"></span> <span class="d-none d-lg-inline-block">10 20 123 456</span></a> 
             <a href="#" class="small mr-3"><span class="icon-envelope mr-2"></span> <span class="d-none d-lg-inline-block">info@mydomain.com</span></a> 
-            <a href="http://localhost/PROJET%20WEB1/View/frontend/templatefront/index.php"class="small mr-3"><span class="d-none d-lg-inline-block">page principale</span></a> 
+            <a href="http://localhost/PROJET%20WEB1/View/frontend/learner-1.0.0/index.php"class="small mr-3"><span class="d-none d-lg-inline-block">page principale</span></a> 
           </div>
 
 
@@ -152,7 +158,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['email'], $_GET['passwor
               </div>
               <div class="col-12 mb-3">
               <a href=" MotDePasse.php  ">Mot de passe oublié ?</a>
-              <a href="http://localhost/PROJET%20WEB1/View/frontend/templatefront/register.php">Créer un compte</a>
+              <a href="http://localhost/PROJET%20WEB1/View/frontend/learner-1.0.0/register.php">Créer un compte</a>
               </div>
          
 

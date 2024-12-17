@@ -34,7 +34,19 @@
 </head>
 
 <body>
+<?php
+session_start();
 
+// Vérifiez si l'utilisateur est connecté
+if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] != 1) {
+    // Rediriger vers la page de connexion si non connecté ou rôle incorrect
+    header('Location: ../../frontend/templatefront/index.php');
+    exit;
+}
+
+
+$pp= $_SESSION['user_id'];
+?>
   <div class="site-mobile-menu">
     <div class="site-mobile-menu-header">
       <div class="site-mobile-menu-close">
@@ -100,12 +112,12 @@ include $_SERVER['DOCUMENT_ROOT'] . '/PROJET WEB1/Model/modelUser.php';
 include $_SERVER['DOCUMENT_ROOT'] . '/PROJET WEB1/Controller/controllerUser.php';
 include $_SERVER['DOCUMENT_ROOT'] . '/PROJET WEB1/Controller/metierController.php';
 
-$id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+
 $userController = new CoursController();
 
 
-if ($id > 0) {
-    $user = $userController->getUserByIdd($id);
+if ($pp> 0) {
+    $user = $userController->getUserByIdd($pp);
 } else {
     $user = null;
 }
