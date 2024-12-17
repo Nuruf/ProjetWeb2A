@@ -245,11 +245,7 @@ if ($sortType === 'recent') {
                 </div>
                 <div class="card-footer">
                     <!-- Like/Dislike Buttons -->
-<<<<<<< HEAD
-        <div class="d-flex align-items-center reaction-container">
-=======
                     <div class="d-flex align-items-center reaction-container">
->>>>>>> 7959260c851ae3824dd25997cd02132e94a62191
     <form method="POST" action="like_dislike.php" class="mr-3 reaction-form">
         <input type="hidden" name="post_id" value="<?= $post['id'] ?>">
         <button type="submit" name="like" class="reaction-btn like-btn">
@@ -458,55 +454,65 @@ document.querySelectorAll('.reaction-btn').forEach(button => {
 });
 </script>
 
-<<<<<<< HEAD
-             <!-- Display Comments -->
-<h6>Comments (<?= $post['comment_count'] ?>):</h6>
-<div class="comments-section">
-    <?php if(isset($commentError)): ?>
-        <div class="alert alert-danger">
-            <?= htmlspecialchars($commentError) ?>
-        </div>
-    <?php endif; ?>
-    <?php 
-    $comments = $commentController->getCommentsByPostId($post['id']);
-    if (!empty($comments)) : 
-        foreach ($comments as $comment) : ?>
-            <div class="comment mb-2">
-                <p><?= htmlspecialchars($comment->getComment()) ?></p>
-                <form method="POST" action="delete_comment.php" class="d-inline">
-                    <input type="hidden" name="comment_id" value="<?= $comment->getId() ?>">
-                    <a href="deletecomment.php?id=<?= $comment->getId() ?>" 
-                       class="btn btn-danger btn-sm"
-                       onclick="return confirm('Are you sure you want to delete this comment?')">Delete</a>
-                </form>
-                <a href="edit_comment.php?id=<?= $comment->getId() ?>" class="btn btn-warning btn-sm">Edit</a>
+                    <!-- Display Comments -->
+                    <h6>Comments (<?= $post['comment_count'] ?>):</h6>
+                    <div class="comments-section">
+                        <?php if(isset($commentError)): ?>
+                            <div class="alert alert-danger">
+                                <?= htmlspecialchars($commentError) ?>
+                            </div>
+                        <?php endif; ?>
+                        <?php 
+                        $comments = $commentController->getCommentsByPostId($post['id']);
+                        if (!empty($comments)) : 
+                            foreach ($comments as $comment) : ?>
+                                <div class="comment mb-2">
+                                    <p><?= htmlspecialchars($comment->getComment()) ?></p>
+                                    <form method="POST" action="delete_comment.php" class="d-inline">
+                                        <input type="hidden" name="comment_id" value="<?= $comment->getId() ?>">
+                                        <a href="deletecomment.php?id=<?= $comment->getId() ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this comment?')">Delete</a>
+                                    </form>
+                                    <a href="edit_comment.php?id=<?= $comment->getId() ?>" class="btn btn-warning btn-sm">Edit</a>
+                                </div>
+                            <?php endforeach; 
+                        else : ?>
+                            <p>No comments yet. Be the first to comment!</p>
+                        <?php endif; ?>
+                    </div>
+
+                    <!-- Add New Comment Form -->
+                    <form method="POST" action="create.php" onsubmit="return validateComment(this)">
+                        <input type="hidden" name="post_id" value="<?= $post['id'] ?>">
+                        <div class="form-group">
+                            <textarea name="comment" class="form-control" rows="2" placeholder="Write a comment..." required maxlength="1000" oninput="checkComment(this)"></textarea>
+                            <small class="text-danger d-none" id="commentError"></small>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-sm">Comment</button>
+                    </form>
+                </div>
             </div>
-        <?php endforeach; 
-    else : ?>
-        <p>No comments yet. Be the first to comment!</p>
-    <?php endif; ?>
+        <?php endforeach; ?>
+        <?php else : ?>
+            <div class="alert alert-info">No posts to display yet. Create the first one!</div>
+        <?php endif; ?>
+    </div>
 </div>
 
-<!-- Add New Comment Form -->
-<form method="POST" action="create.php" onsubmit="return validateComment(this)">
-    <input type="hidden" name="post_id" value="<?= $post['id'] ?>">
-    <div class="form-group">
-        <textarea name="comment" class="form-control" rows="2" 
-                  placeholder="Write a comment..." required
-                  maxlength="1000"
-                  oninput="checkComment(this)"></textarea>
-        <small class="text-danger d-none" id="commentError"></small>
-    </div>
-    <button type="submit" class="btn btn-primary btn-sm">Comment</button>
-</form>
-</div>
-</div>
-<?php endforeach; ?>
-<?php else : ?>
-    <div class="alert alert-info">No posts to display yet. Create the first one!</div>
-<?php endif; ?>
-</div>
-</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
 
 <script>
 function validateComment(form) {
@@ -543,62 +549,6 @@ function checkComment(textarea) {
     errorElement.classList.add('d-none');
 }
 </script>
-
-=======
-                    <!-- Display Comments -->
-                    <h6>Comments (<?= $post['comment_count'] ?>):</h6>
-                    <div class="comments-section">
-                        <?php 
-                        $comments = $commentController->getCommentsByPostId($post['id']);
-                        if (!empty($comments)) : 
-                            foreach ($comments as $comment) : ?>
-                                <div class="comment mb-2">
-                                    <p><?= htmlspecialchars($comment->getComment()) ?></p>
-                                    <form method="POST" action="delete_comment.php" class="d-inline">
-                                        <input type="hidden" name="comment_id" value="<?= $comment->getId() ?>">
-                                        <a href="deletecomment.php?id=<?= $comment->getId() ?>" class="btn btn-danger btn-sm">Delete</a>
-                                    </form>
-                                    <a href="edit_comment.php?id=<?= $comment->getId() ?>" class="btn btn-warning btn-sm">Edit</a>
-                                </div>
-                            <?php endforeach; 
-                        else : ?>
-                            <p>No comments yet. Be the first to comment!</p>
-                        <?php endif; ?>
-                    </div>
-
-                    <!-- Add New Comment Form -->
-                    <form method="POST" action="create.php">
-                        <input type="hidden" name="post_id" value="<?= $post['id'] ?>">
-                        <div class="form-group">
-                            <textarea name="comment" class="form-control" rows="2" placeholder="Write a comment..." required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-sm">Comment</button>
-                    </form>
-                </div>
-            </div>
-        <?php endforeach; ?>
-        <?php else : ?>
-            <div class="alert alert-info">No posts to display yet. Create the first one!</div>
-        <?php endif; ?>
-    </div>
-</div>
-
->>>>>>> 7959260c851ae3824dd25997cd02132e94a62191
-
-
-
-
-
-
-
-
-
-
-
-
-   
-
-
 
 <script>
   function validatePostForm() {
