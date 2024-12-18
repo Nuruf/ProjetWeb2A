@@ -33,7 +33,7 @@ $list = $categoriesController->listCategories();
     </aside>
 
 <div class="container mt-5">
-    <div id="skillSwapp-content" class="section-content">
+    <div id="skillSwapp-content" >
         <h1 class="section-title">Categories</h1>
         <p class="section-description">Exchange skills with other members of the community. Find new opportunities for learning and teaching.</p>
         <a href="createCategory.php" class="btn btn-primary">Add New Category</a><br>

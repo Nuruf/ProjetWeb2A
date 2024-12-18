@@ -63,6 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <div class="container mt-5">
         <h2>Create New Category</h2>
+        <a href="listCategories.php" class="btn btn-primary"><--</a><br>
         <?php if ($error): ?>
             <div class="alert alert-danger" role="alert">
                 <?= htmlspecialchars($error) ?>
