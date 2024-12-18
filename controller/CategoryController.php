@@ -14,6 +14,30 @@ class categoriesController{
         }
     }
 
+    public function getCategoryStatistics() {
+    
+        // SQL query to count the number of courses (contenu) per category (categories)
+        $sql = "
+            SELECT c.nomCat AS category_name, COUNT(t.idContenu) AS course_count
+            FROM categories c
+            LEFT JOIN contenu t ON c.idCat = t.idCat
+            GROUP BY c.nomCat
+        ";
+        $db = config::getConnexion();
+        $result = $db->query($sql);
+    
+        // Prepare the statistics data
+        $data = [];
+        while ($row = $result->fetch(PDO::FETCH_ASSOC)) { // FIX: Changed fetch_assoc() to fetch(PDO::FETCH_ASSOC)
+            $data[] = [
+                'category' => $row['category_name'], // Matches 'nomCat' in categories
+                'count' => $row['course_count']     // Count of 'idContenu' in contenu
+            ];
+        }
+    
+        return $data;
+    }
+    
     function deleteCategory($idCat){
         $sql = "DELETE FROM categories WHERE idCat = :idCat"; 
         $db = config::getConnexion();
