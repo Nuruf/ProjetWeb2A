@@ -37,7 +37,11 @@ class QuestionController{
 
 
     public function addQuestion($question) {
+<<<<<<< Updated upstream
         $sql = "INSERT INTO question VALUES (null, :idquiz, :question_text, :points)";
+=======
+        $sql = "INSERT INTO question VALUES (:idquiz, null, :question_text, :points)";
+>>>>>>> Stashed changes
         $db=config::getConnexion();
         $req = $db->prepare($sql);
        
@@ -80,7 +84,11 @@ class QuestionController{
     
             }
     
+<<<<<<< Updated upstream
             public function getNumberOfQuestions($quizId) {
+=======
+             function getNumberOfQuestions($quizId) {
+>>>>>>> Stashed changes
                 $db=config::getconnexion();
                 $stmt = $db->prepare("SELECT COUNT(*) as question_count FROM question WHERE idquiz = :quiz_id");
                 $stmt->bindParam(':quiz_id', $quizId, PDO::PARAM_INT);
