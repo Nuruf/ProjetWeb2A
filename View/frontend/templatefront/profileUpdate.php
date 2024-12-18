@@ -5,8 +5,8 @@
 * License: https://creativecommons.org/licenses/by/3.0/
 */ -->
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'] . '/PROJET WEB1/Controller/controllerUser.php');
-require_once($_SERVER['DOCUMENT_ROOT'] . '/PROJET WEB1/Model/modelUser.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/PROJET WEB/Controller/controllerUser.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/PROJET WEB/Model/modelUser.php');
 
 $utilisateur1 = null;
 

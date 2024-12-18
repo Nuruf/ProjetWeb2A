@@ -1,6 +1,6 @@
 
 <?php
-include_once __DIR__ . '/../config/config.php'; 
+require_once 'C:\xampp\htdocs\projet web\conf.php';
 class CoursController {
     
     
@@ -10,7 +10,7 @@ class CoursController {
                 VALUES (:email, :motdepasse, :telephone, :utilisateur, :role)"; 
 
        
-        $db = config::getConnexion();
+        $db = DatabaseConfig::getConnexion();
 
         try {
            
@@ -33,7 +33,7 @@ class CoursController {
     public function listUser()
     {
         $sql = "SELECT * FROM  utilisateur";
-        $db = config::getConnexion();
+        $db = DatabaseConfig::getConnexion();
         try {
             $liste = $db->query($sql);
             return $liste;
@@ -44,7 +44,7 @@ class CoursController {
     function deleteUser($id)
     {
         $sql = "DELETE FROM Utilisateur WHERE id = :Id";
-        $db = config::getConnexion();
+        $db = DatabaseConfig::getConnexion();
         $req = $db->prepare($sql);
         $req->bindValue(':Id', $id);
 
@@ -63,7 +63,7 @@ class CoursController {
         
         try {
          
-            $db = config::getConnexion();
+            $db = DatabaseConfig::getConnexion();
     
            
             $query = $db->prepare(
@@ -97,7 +97,7 @@ class CoursController {
     }
     public function getUserById($userId) {
     
-        $db = new PDO("mysql:host=localhost;dbname=user", 'root', '');
+        $db = new PDO("mysql:host=localhost;dbname=testadmin", 'root', '');
         $query = "SELECT * FROM utilisateur WHERE Id = :userId";
         $stmt = $db->prepare($query);
         $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
@@ -114,7 +114,7 @@ class CoursController {
 {
     $sql = "SELECT * FROM utilisateur WHERE Email = :email";
 
-    $db = config::getConnexion();
+    $db = DatabaseConfig::getConnexion();
 
     try {
  
@@ -149,7 +149,7 @@ class CoursController {
     public function getUserByIdd($id)
 {
     $sql = "SELECT * FROM utilisateur WHERE Id = :id"; 
-    $db = config::getConnexion();
+    $db = DatabaseConfig::getConnexion();
     try {
         $stmt = $db->prepare($sql); 
         $stmt->bindValue(':id', $id, PDO::PARAM_INT); 

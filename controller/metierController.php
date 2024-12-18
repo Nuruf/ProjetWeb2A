@@ -1,12 +1,12 @@
 <?php
-include_once __DIR__ . '/../config/config.php'; 
+require_once 'C:\xampp\htdocs\projet web\conf.php';
 
 
 class metierController {
     
   
     public function searchUsers($searchTerm = '') {
-        $db = config::getConnexion();
+        $db = DatabaseConfig::getConnexion();
     
         if (!empty($searchTerm)) {
             $sql = "SELECT Id, Email, MotDePasse, Telephone, Utilisateur, Role 
@@ -38,7 +38,7 @@ class metierController {
     }
 
     public function getUsersPercentage() {
-        $db = config::getConnexion();
+        $db = DatabaseConfig::getConnexion();
     
         try {
             $sql = "SELECT Role FROM utilisateur";
@@ -77,7 +77,7 @@ class metierController {
     }
 
     public function chatbot($message) {
-        $db = config::getConnexion(); 
+        $db = DatabaseConfig::getConnexion(); 
     
         try {
             $normalizedMessage = $this->normalizeMessage($message);
