@@ -4,8 +4,44 @@
 * Tempalte URI: https://untree.co/
 * License: https://creativecommons.org/licenses/by/3.0/
 */ -->
-<!doctype html>
-<html lang="en">
+<?php
+session_start(); // Démarrer la session au début du fichier
+
+include $_SERVER['DOCUMENT_ROOT'] . '/PROJET WEB/Controller/controllerUser.php';
+
+// Vérifiez si le formulaire a été soumis
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['email'], $_GET['password'])) {
+    $email = $_GET['email'];
+    $password = $_GET['password'];
+
+    $userController = new CoursController();
+    $user = $userController->checkUser($email, $password);
+
+    if (is_array($user)) {
+        // Si les informations d'identification sont correctes
+        $_SESSION['user_id'] = $user['Id']; // Stocker l'ID dans la session
+        $_SESSION['user_role'] = $user['Role']; // Stocker le rôle dans la session
+        $_SESSION['user_email'] = $user['Email']; // Stocker l'email (optionnel)
+
+        if ($user['Role'] == 0) {
+            // Rediriger vers le tableau de bord admin
+            echo "<script>alert('Connexion réussie - Page Admin.');</script>";
+            header('Location: /PROJET%20WEB/View/BackOffice/dashboard backoffice.php');
+            exit;
+        } elseif ($user['Role'] == 1) {
+            // Rediriger vers le tableau de bord utilisateur
+            echo "<script>alert('Connexion réussie.');</script>";
+            header('Location: ../../frontend/templatefront/profile.php');
+            exit;
+        }
+    } else {
+        echo "<script>alert('Email ou mot de passe incorrect.');</script>";
+    }
+}
+?>
+
+<!doctype php>
+<php lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -55,18 +91,10 @@
             <a href="#" class="small mr-3"><span class="icon-question-circle-o mr-2"></span> <span class="d-none d-lg-inline-block">Have a questions?</span></a> 
             <a href="#" class="small mr-3"><span class="icon-phone mr-2"></span> <span class="d-none d-lg-inline-block">10 20 123 456</span></a> 
             <a href="#" class="small mr-3"><span class="icon-envelope mr-2"></span> <span class="d-none d-lg-inline-block">info@mydomain.com</span></a> 
+            <a href="http://localhost/PROJET%20WEB1/View/frontend/learner-1.0.0/index.php"class="small mr-3"><span class="d-none d-lg-inline-block">page principale</span></a> 
           </div>
 
-          <div class="col-6 col-lg-3 text-right">
-            <a href="login.html" class="small mr-3">
-              <span class="icon-lock"></span>
-              Log In
-            </a>
-            <a href="register.html" class="small">
-              <span class="icon-person"></span>
-              Register
-            </a>
-          </div>
+
 
         </div>
       </div>
@@ -74,18 +102,9 @@
     <div class="sticky-nav js-sticky-header">
       <div class="container position-relative">
         <div class="site-navigation text-center">
-          <a href="index.html" class="logo menu-absolute m-0">Learner<span class="text-primary">.</span></a>
+          <a href="index.php" class="logo menu-absolute m-0">Learner<span class="text-primary">.</span></a>
 
-          <ul class="js-clone-nav d-none d-lg-inline-block site-menu">
-            <li><a href="index.html">Home</a></li>
-            
-            <li><a href="profile.html">Profile</a></li>
-            <li><a href="forum.html">Forum</a></li>
-            <li><a href="skillswap.html">SKILL SWAP</a></li>
-            <li><a href="blog.html">Blog</a></li>
-            <li><a href="quiz.html">Quiz</a></li>
-            <li><a href="reclamation.html">Reclamation</a></li>
-          </ul>
+       
 
           <a href="#" class="btn-book btn btn-secondary btn-sm menu-absolute">Enroll Now</a>
 
@@ -123,25 +142,28 @@
 
       <div class="row mb-5 justify-content-center">
         <div class="col-lg-5 mx-auto order-1" data-aos="fade-up" data-aos-delay="200">
-          <form action="#" class="form-box">
+          <form  class="form-box">
             <div class="row">
-              <div class="col-12 mb-3">
-                <input type="text" class="form-control" placeholder="Email">
-              </div>
-              <div class="col-12 mb-3">
-                <input type="password" class="form-control" placeholder="Password">
+             
+            <div class="col-12 mb-3">
+                <label for="email">Email</label>
+                <input type="text" class="form-control" id="email" name="email" placeholder=" entrez votre Email">
+                <p id="errorMessageEmail" style="color: red;"></p> <!-- Unique ID -->
               </div>
 
               <div class="col-12 mb-3">
-                <label class="control control--checkbox">
-                  <span class="caption">Remember me</span>
-                  <input type="checkbox" checked="checked" />
-                  <div class="control__indicator"></div>
-                </label>
+                 <label for="password">Mot de passe</label>
+                 <input type="password" class="form-control" id="password" name ="password" placeholder="Donner votre mot de passe">
+                 <p id="errorMessagePassword" style="color: red;"></p> <!-- Unique ID -->
               </div>
+              <div class="col-12 mb-3">
+              <a href=" MotDePasse.php  ">Mot de passe oublié ?</a>
+              <a href="http://localhost/PROJET%20WEB1/View/frontend/learner-1.0.0/register.php">Créer un compte</a>
+              </div>
+         
 
               <div class="col-12">
-                <input type="submit" value="Send Message" class="btn btn-primary">
+                <input type="submit" value="connexion" class="btn btn-primary">
               </div>
             </div>
           </form>
@@ -238,7 +260,36 @@
         <span class="sr-only">Loading...</span>
       </div>
     </div>
+    <script>
+    function validateForm() {
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const errorMessage = document.getElementById('errorMessage');
+        const errorMessage2 = document.getElementById('errorMessage2');
 
+        // Effacer les messages d'erreur précédents
+        errorMessage.textContent = '';
+        errorMessage2.textContent = '';
+
+        if (email === '' && password === '') {
+            errorMessage.textContent = 'Veuillez entrer votre email.';
+            errorMessage2.textContent = 'Veuillez entrer votre mot de passe.';
+            return false;
+        }
+
+        if (email === '') {
+            errorMessage.textContent = 'Veuillez entrer votre email.';
+            return false; // Empêche l'envoi du formulaire
+        }
+
+        if (password === '') {
+            errorMessage2.textContent = 'Veuillez entrer votre mot de passe.';
+            return false;
+        }
+
+        return true;
+    }
+</script>
     <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
@@ -252,4 +303,4 @@
 
   </body>
 
-  </html>
+  </php>

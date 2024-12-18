@@ -1,0 +1,307 @@
+/* Styles généraux */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    display: flex;
+    min-height: 100vh;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+/* Barre latérale */
+.sidebar {
+    width: 250px;
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+    position: fixed;
+    height: 100%;
+}
+
+.sidebar-header {
+    text-align: center;
+}
+
+.sidebar .logo {
+    width: 100px;
+
+    margin-bottom: 10px;
+}
+
+.menu ul {
+    list-style: none;
+    width: 100%;
+}
+
+.menu ul li {
+    width: 100%;
+}
+
+.menu ul li a {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    color: #ecf0f1;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.menu ul li a:hover {
+    background-color: #34495e;
+}
+
+.menu ul li a i {
+    margin-right: 10px;
+}
+
+/* Contenu principal */
+.main-content {
+    margin-left: 250px;
+    padding: 20px;
+    flex: 1;
+}
+
+.user-info {
+    background-color: #3498db;
+    color: #fff;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.logout-btn {
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.logout-btn:hover {
+    background-color: #c0392b;
+}
+
+/* Sections */
+.section-content {
+    display: none;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.section-content h2 {
+    margin-bottom: 15px;
+    color: #2c3e50;
+}
+
+.section-content p {
+    line-height: 1.6;
+}
+
+
+/*****************/
+
+/* Style du conteneur de profil */
+.profile-info {
+    background-color: #eed7d7;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+    margin: 20px;
+}
+
+/* Style des paragraphes */
+.profile-info p {
+    font-size: 16px;
+    margin: 10px 0;
+    color: #333;
+}
+
+/* Mettre en surbrillance les labels (Nom, Email, etc.) */
+.profile-info strong {
+    color: #007bff;
+}
+
+/* Style de texte pour les erreurs */
+.profile-info p.error {
+    color: red;
+    font-weight: bold;
+}
+
+/* Ajout d'un effet de survol pour le cadre de profil */
+.profile-info:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+}
+/* Table */
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.styled-table th {
+    background-color: #007BFF;
+    color: white;
+}
+
+.styled-table th, .styled-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.styled-table tbody tr:hover {
+    background-color: #f2f2f2;
+}
+
+/* Boutons */
+.btn-update {
+    background-color: #007BFF;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+}
+
+.btn-update:hover {
+    background-color: #0056b3;
+}
+
+.btn-delete {
+    background-color: #f44336;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+}
+
+.btn-delete:hover {
+    background-color: #e53935;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/***************containersearch*****************/
+.search-container {
+    text-align: center;
+    margin-bottom: 30px;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 400px;
+}
+
+.search-container form {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 30px;
+    padding: 5px 15px;
+    background: linear-gradient(90deg, #f8f9fa, #e9ecef);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.search-container form:hover {
+    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+.search-container input {
+    border: none;
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 20px;
+    margin-right: 10px;
+    flex-grow: 1;
+    background-color: #fff;
+    box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.search-container input:focus {
+    outline: none;
+    box-shadow: inset 0px 3px 5px rgba(0, 0, 0, 0.2);
+    border: 1px solid #0d6efd;
+}
+
+.search-container button {
+    background: linear-gradient(90deg, #007bff, #0056b3);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.search-container button:hover {
+    background: linear-gradient(90deg, #0056b3, #004085);
+    transform: translateY(-2px);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+}
+/****************statistique***********************/
+/* Classe pour styliser le tableau */
+.table-stats {
+    width: 60%;                /* Largeur du tableau */
+    margin: 50px auto;         /* Centrer le tableau */
+    border-collapse: collapse; /* Fusionner les bordures des cellules */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Ombre douce autour du tableau */
+}
+
+/* Style des cellules d'en-tête */
+.table-stats th {
+    background-color: #0062cc; /* Couleur de fond de l'en-tête */
+    color: white;              /* Texte blanc */
+    padding: 12px;             /* Espacement intérieur */
+    font-size: 1.1rem;         /* Taille de la police */
+    text-align: center;        /* Centrer le texte */
+    border: 1px solid #ddd;    /* Bordure gris clair */
+}
+
+/* Style des cellules de données */
+.table-stats td {
+    background-color: #f8f8f8; /* Couleur de fond des cellules */
+    padding: 12px;              /* Espacement intérieur */
+    font-size: 1rem;            /* Taille de la police */
+    text-align: center;         /* Centrer le texte */
+    border: 1px solid #ddd;     /* Bordure gris clair */
+}
+
+/* Alternance des couleurs des lignes */
+.table-stats tr:nth-child(even) td {
+    background-color: #f1f1f1; /* Ligne paire avec une couleur différente */
+}
+
+/* Style pour les pourcentages (mettre en valeur) */
+.table-stats .percentage {
+    font-weight: bold;         /* Mettre en gras */
+    color: #0062cc;            /* Couleur bleue */
+}
+
+/* Effet de survol sur les lignes */
+.table-stats tr:hover td {
+    background-color: #e1e1e1; /* Couleur de fond lorsqu'on survole une ligne */
+}

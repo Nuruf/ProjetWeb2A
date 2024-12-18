@@ -14,9 +14,8 @@
   display: block; /* Center the iframe horizontally */
   background-color: white; /* White background for clarity */
   }</style>
-
-<!doctype html>
-<html lang="en">
+<!doctype php>
+<php lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -37,7 +36,7 @@
   <link rel="stylesheet" href="css/owl.theme.default.min.css">
   <link rel="stylesheet" href="css/jquery.fancybox.min.css">
   <link rel="stylesheet" href="fonts/icomoon/style.css">
-  <link rel="stylesheet" href="font/flaticon.css">
+  <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
   <link rel="stylesheet" href="css/aos.css">
   <link rel="stylesheet" href="css/style.css">
 
@@ -68,16 +67,7 @@
             <a href="#" class="small mr-3"><span class="icon-envelope mr-2"></span> <span class="d-none d-lg-inline-block">skillswap@gmail.com</span></a> 
           </div>
 
-          <div class="col-6 col-lg-3 text-right">
-            <a href="login.html" class="small mr-3">
-              <span class="icon-lock"></span>
-              Log In
-            </a>
-            <a href="register.html" class="small">
-              <span class="icon-person"></span>
-              Register
-            </a>
-          </div>
+
 
         </div>
       </div>
@@ -85,17 +75,17 @@
     <div class="sticky-nav js-sticky-header">
       <div class="container position-relative">
         <div class="site-navigation text-center">
-          <a href="index.html" class="logo menu-absolute m-0">Learner<span class="text-primary">.</span></a>
+          <a href="index.php" class="logo menu-absolute m-0">Se deconnecter<span class="text-primary">.</span></a>
 
           <ul class="js-clone-nav d-none d-lg-inline-block site-menu">
-            <li><a href="index.html">Home</a></li>
+            <li><a href="index.php">Home</a></li>
             
-            <li><a href="profile.html">Profile</a></li>
-            <li><a href="forum.html">Forum</a></li>
-            <li><a href="skillswap.html">SKILL SWAP</a></li>
-            <li><a href="blog.html">Blog</a></li>
-            <li ><a href="quiz.html">Quiz</a></li>
-            <li class="active"><a href="reclamation.html">Reclamation</a></li>
+            <li><a href="profile.php">Profile</a></li>
+            <li><a href="forum.php">Forum</a></li>
+            <li><a href="skillswap.php">SKILL SWAP</a></li>
+            <li><a href="blog.php">Blog</a></li>
+            <li ><a href="quiz.php">Quiz</a></li>
+            <li class="active"><a href="reclamation.php">Reclamation</a></li>
           </ul>
 
           <a href="#" class="btn-book btn btn-secondary btn-sm menu-absolute">Enroll Now</a>
@@ -115,8 +105,16 @@
       <div class="row align-items-center justify-content-center">
         <div class="col-12">
           <div class="row justify-content-center ">
-            
-            
+            <div class="col-lg-6 text-center ">
+              <h1 class="mb-4 heading text-white" data-aos="fade-up" data-aos-delay="100">Contact Us</h1>
+              <div class="mb-5 text-white desc mx-auto" data-aos="fade-up" data-aos-delay="200">
+                <p>Another free template by <a href="https://untree.co/" target="_blank" class="link-highlight">Untree.co</a>. Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live.</p>
+              </div>
+
+              <p class="mb-0" data-aos="fade-up" data-aos-delay="300"><a href="#" class="btn btn-secondary">Explore courses</a></p>
+
+            </div>
+
 
           </div>
 
@@ -168,7 +166,7 @@
             <h3>Projects</h3>
             <ul class="list-unstyled float-left links">
               <li><a href="#">Web Design</a></li>
-              <li><a href="#">HTML5</a></li>
+              <li><a href="#">php5</a></li>
               <li><a href="#">CSS3</a></li>
               <li><a href="#">jQuery</a></li>
               <li><a href="#">Bootstrap</a></li>
@@ -239,4 +237,4 @@
 
   </body>
 
-  </html>
+  </php>

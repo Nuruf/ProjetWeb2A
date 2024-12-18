@@ -12,15 +12,25 @@
             color: #333;
             margin: 0;
             padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
 
-        /* Container Styling */
-        .form-container {
-            width: 100%;
-            padding: 20px;
+        /* Form Styling */
+        form {
             background-color: #ffffff;
-            box-sizing: border-box; /* Ensure padding doesn't add to width */
-            animation: fadeIn 0.5s ease;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            width: 100%;
+            max-width: 500px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        form:hover {
+            transform: scale(1.02);
         }
 
         h1 {
@@ -44,7 +54,6 @@
             width: 100%;
             padding: 12px;
             margin-top: 8px;
-            margin-bottom: 16px;
             border: 2px solid #b3d9ff;
             border-radius: 8px;
             font-size: 1rem;
@@ -61,7 +70,7 @@
 
         textarea {
             resize: vertical;
-            min-height: 100px;
+            min-height: 150px;
         }
 
         /* Button Styling */
@@ -85,62 +94,30 @@
             background-color: #003f66;
         }
 
-        /* Separate Forms Styling */
-        .sub-form {
-            margin-bottom: 20px;
-            padding: 20px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-        }
-
-        /* Responsive Design */
+        /* Responsive design */
         @media (max-width: 600px) {
             h1 {
                 font-size: 1.5rem;
             }
-            .form-container {
-                padding: 15px;
-            }
-        }
-
-        /* Animation */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
+            form {
+                padding: 20px;
+                width: 90%;
             }
         }
     </style>
     <script src="validateForm.js"></script>
 </head>
 <body>
-    <div class="form-container">
+    <form action="../backoffice/addreclamation.php" method="post" onsubmit="return validateForm(event)" id="reclamationForm">
         <h1>Formulaire de Réclamation</h1>
-        
-        <!-- Form to see user's reclamations -->
-        <div class="sub-form">
-            <form action="../backoffice/reclamationlist.php" method="post">
-                
-                <button type="submit">Voir mes réclamations</button>
-            </form>
-        </div>
 
-        <!-- Form to submit a new reclamation -->
-        <div class="sub-form">
-            <form id="reclamationForm" action="../backoffice/addreclamation.php" method="post">
-                <!-- Description Field -->
-                <label for="description">Description :</label>
-                <textarea id="description" name="description" rows="4" placeholder="Entrez la description ici..." ></textarea>
-        
-                <!-- Submit Button -->
-                <button type="submit">Envoyer</button>
-            </form>
-        </div>
-    </div>
-    <script src="../frontend/validateform.js"></script>
+        <label for="user_id">ID utilisateur :</label>
+        <input type="text" id="user_id" name="user_id" >
+
+        <label for="description">Description :</label>
+        <textarea id="description" name="description" rows="4" placeholder="Entrez la description ici..." ></textarea>
+
+        <button type="submit">Envoyer</button>
+    </form>
 </body>
 </html>

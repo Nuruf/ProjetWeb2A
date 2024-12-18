@@ -1,3 +1,13 @@
+<style>iframe {
+        width: 100%; /* Set width of iframe */
+        height: 100vh; /* Set height relative to viewport */
+        margin: auto;
+        border: 2px solid #007bff; /* Add border for clarity */
+        border-radius: 8px; /* Rounded corners for iframe */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for a clean look */
+        display: block; /* Center the iframe horizontally */
+        background-color: white; /* White background for clarity */}   
+    </style>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -21,8 +31,8 @@ if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] != 0) {
 $pp=$_SESSION['user_id'];
 ?>
 <?php
-    include $_SERVER['DOCUMENT_ROOT'] . '/PROJET WEB1/Model/modelUser.php';
-    include $_SERVER['DOCUMENT_ROOT'] . '/PROJET WEB1/Controller/controllerUser.php';
+    include $_SERVER['DOCUMENT_ROOT'] . '/PROJET WEB/Model/modelUser.php';
+    include $_SERVER['DOCUMENT_ROOT'] . '/PROJET WEB/Controller/controllerUser.php';
 
     // Récupération des paramètres GET
    
@@ -195,8 +205,7 @@ $pp=$_SESSION['user_id'];
             </div>
 
             <div id="reclamation-content" class="section-content">
-                <h2>Réclamation</h2>
-                <p>Envoyez vos réclamations ou signalez des problèmes.</p>
+            <iframe src="../backoffice/reclamationlistadmin.php" frameborder="0"></iframe>
             </div>
         </div>
     </main>

@@ -1,26 +1,22 @@
-// Fonction pour valider le formulaire
+// JavaScript File: validateform.js
+
+// Validation Function
 function validateForm(event) {
-    // Empêcher l'envoi par défaut
+    // Prevent default form submission
     event.preventDefault();
 
-    // Récupérer les champs
-    const userId = document.getElementById('user_id').value.trim();
+    // Get the description value
     const description = document.getElementById('description').value.trim();
 
-    // Vérifier l'ID utilisateur (doit être un nombre positif non vide)
-    if (!userId || isNaN(userId) || parseInt(userId) <= 0) {
-        alert("Veuillez entrer un ID utilisateur valide (un nombre positif).");
-        return false;
-    }
-
-    // Vérifier la description (doit être remplie et dépasser un certain nombre de caractères)
+    // Validate the description (must be at least 10 characters)
     if (!description || description.length < 10) {
         alert("La description doit contenir au moins 10 caractères.");
         return false;
     }
 
-    // Si tout est correct, soumettre le formulaire
+    // If validation passes, submit the form
     document.getElementById('reclamationForm').submit();
 }
 
-
+// Add event listener to the form
+document.getElementById('reclamationForm').addEventListener('submit', validateForm);

@@ -4,8 +4,8 @@
 * Tempalte URI: https://untree.co/
 * License: https://creativecommons.org/licenses/by/3.0/
 */ -->
-<!doctype html>
-<html lang="en">
+<!doctype php>
+<php lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -54,19 +54,11 @@
           <div class="col-6 col-lg-9">
             <a href="#" class="small mr-3"><span class="icon-question-circle-o mr-2"></span> <span class="d-none d-lg-inline-block">Have a questions?</span></a> 
             <a href="#" class="small mr-3"><span class="icon-phone mr-2"></span> <span class="d-none d-lg-inline-block">10 20 123 456</span></a> 
-            <a href="#" class="small mr-3"><span class="icon-envelope mr-2"></span> <span class="d-none d-lg-inline-block">info@mydomain.com</span></a> 
+            <a href="#" class="small mr-3"><span class="icon-envelope mr-2"></span> <span class="d-none d-lg-inline-block">info@mydomain.com</span></a>
+           
           </div>
 
-          <div class="col-6 col-lg-3 text-right">
-            <a href="login.html" class="small mr-3">
-              <span class="icon-lock"></span>
-              Log In
-            </a>
-            <a href="register.html" class="small">
-              <span class="icon-person"></span>
-              Register
-            </a>
-          </div>
+
 
         </div>
       </div>
@@ -74,17 +66,17 @@
     <div class="sticky-nav js-sticky-header">
       <div class="container position-relative">
         <div class="site-navigation text-center">
-          <a href="index.html" class="logo menu-absolute m-0">Learner<span class="text-primary">.</span></a>
+          <a href="index.php" class="logo menu-absolute m-0">Se deconnecter<span class="text-primary">.</span></a>
 
           <ul class="js-clone-nav d-none d-lg-inline-block site-menu">
-            <li><a href="index.html">Home</a></li>
+            <li><a href="index.php">Home</a></li>
             
-            <li><a href="profile.html">Profile</a></li>
-            <li><a href="forum.html">Forum</a></li>
-            <li class="active"><a href="skillswap.html">SKILL SWAP</a></li>
-            <li><a href="blog.html">Blog</a></li>
-            <li><a href="quiz.html">Quiz</a></li>
-            <li><a href="reclamation.html">Reclamation</a></li>
+            <li><a href="profile.php">Profile</a></li>
+            <li><a href="forum.php">Forum</a></li>
+            <li class="active"><a href="skillswap.php">SKILL SWAP</a></li>
+            <li><a href="blog.php">Blog</a></li>
+            <li><a href="quiz.php">Quiz</a></li>
+            <li><a href="reclamation.php">Reclamation</a></li>
           </ul>
 
           <a href="#" class="btn-book btn btn-secondary btn-sm menu-absolute">Enroll Now</a>
@@ -223,7 +215,7 @@
             <h3>Projects</h3>
             <ul class="list-unstyled float-left links">
               <li><a href="#">Web Design</a></li>
-              <li><a href="#">HTML5</a></li>
+              <li><a href="#">php5</a></li>
               <li><a href="#">CSS3</a></li>
               <li><a href="#">jQuery</a></li>
               <li><a href="#">Bootstrap</a></li>
@@ -294,4 +286,4 @@
 
   </body>
 
-  </html>
+  </php>
