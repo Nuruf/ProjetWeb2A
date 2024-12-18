@@ -4,8 +4,19 @@
 * Tempalte URI: https://untree.co/
 * License: https://creativecommons.org/licenses/by/3.0/
 */ -->
-<!doctype php>
-<php lang="en">
+<style>iframe {
+  width: 100%; /* Set width of iframe */
+  height: 100vh; /* Set height relative to viewport */
+  margin: auto;
+  border: 2px solid #007bff; /* Add border for clarity */
+  border-radius: 8px; /* Rounded corners for iframe */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for a clean look */
+  display: block; /* Center the iframe horizontally */
+  background-color: white; /* White background for clarity */
+  }</style>
+
+<!doctype html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -26,7 +37,7 @@
   <link rel="stylesheet" href="css/owl.theme.default.min.css">
   <link rel="stylesheet" href="css/jquery.fancybox.min.css">
   <link rel="stylesheet" href="fonts/icomoon/style.css">
-  <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
+  <link rel="stylesheet" href="font/flaticon.css">
   <link rel="stylesheet" href="css/aos.css">
   <link rel="stylesheet" href="css/style.css">
 
@@ -57,7 +68,16 @@
             <a href="#" class="small mr-3"><span class="icon-envelope mr-2"></span> <span class="d-none d-lg-inline-block">skillswap@gmail.com</span></a> 
           </div>
 
-
+          <div class="col-6 col-lg-3 text-right">
+            <a href="login.html" class="small mr-3">
+              <span class="icon-lock"></span>
+              Log In
+            </a>
+            <a href="register.html" class="small">
+              <span class="icon-person"></span>
+              Register
+            </a>
+          </div>
 
         </div>
       </div>
@@ -65,17 +85,17 @@
     <div class="sticky-nav js-sticky-header">
       <div class="container position-relative">
         <div class="site-navigation text-center">
-          <a href="index.php" class="logo menu-absolute m-0">Se deconnecter<span class="text-primary">.</span></a>
+          <a href="index.html" class="logo menu-absolute m-0">Learner<span class="text-primary">.</span></a>
 
           <ul class="js-clone-nav d-none d-lg-inline-block site-menu">
-            <li><a href="index.php">Home</a></li>
+            <li><a href="index.html">Home</a></li>
             
-            <li><a href="profile.php">Profile</a></li>
-            <li><a href="forum.php">Forum</a></li>
-            <li><a href="skillswap.php">SKILL SWAP</a></li>
-            <li><a href="blog.php">Blog</a></li>
-            <li ><a href="quiz.php">Quiz</a></li>
-            <li class="active"><a href="reclamation.php">Reclamation</a></li>
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="forum.html">Forum</a></li>
+            <li><a href="skillswap.html">SKILL SWAP</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li ><a href="quiz.html">Quiz</a></li>
+            <li class="active"><a href="reclamation.html">Reclamation</a></li>
           </ul>
 
           <a href="#" class="btn-book btn btn-secondary btn-sm menu-absolute">Enroll Now</a>
@@ -95,16 +115,8 @@
       <div class="row align-items-center justify-content-center">
         <div class="col-12">
           <div class="row justify-content-center ">
-            <div class="col-lg-6 text-center ">
-              <h1 class="mb-4 heading text-white" data-aos="fade-up" data-aos-delay="100">Contact Us</h1>
-              <div class="mb-5 text-white desc mx-auto" data-aos="fade-up" data-aos-delay="200">
-                <p>Another free template by <a href="https://untree.co/" target="_blank" class="link-highlight">Untree.co</a>. Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live.</p>
-              </div>
-
-              <p class="mb-0" data-aos="fade-up" data-aos-delay="300"><a href="#" class="btn btn-secondary">Explore courses</a></p>
-
-            </div>
-
+            
+            
 
           </div>
 
@@ -121,62 +133,7 @@
   <div class="untree_co-section">
     <div class="container">
 
-      <div class="row mb-5">
-        <div class="col-lg-4 mb-5 order-2 mb-lg-0" data-aos="fade-up" data-aos-delay="100">
-          <div class="contact-info">
-
-            <div class="address mt-4">
-              <i class="icon-room"></i>
-              <h4 class="mb-2">Location:</h4>
-              <p>43 Raymouth Rd. Baltemoer, London 3910</p>
-            </div>
-
-            <div class="open-hours mt-4">
-              <i class="icon-clock-o"></i>
-              <h4 class="mb-2">Open Hours:</h4>
-              <p>
-                Sunday-Friday:<br>
-                11:00 AM - 2300 PM
-              </p>
-            </div>
-
-            <div class="email mt-4">
-              <i class="icon-envelope"></i>
-              <h4 class="mb-2">Email:</h4>
-              <p>info@Untree.co</p>
-            </div>
-
-            <div class="phone mt-4">
-              <i class="icon-phone"></i>
-              <h4 class="mb-2">Call:</h4>
-              <p>+1 1234 55488 55</p>
-            </div>
-
-          </div>
-        </div>
-        <div class="col-lg-7 mr-auto order-1" data-aos="fade-up" data-aos-delay="200">
-          <form action="#">
-            <div class="row">
-              <div class="col-6 mb-3">
-                <input type="text" class="form-control" placeholder="Your Name">
-              </div>
-              <div class="col-6 mb-3">
-                <input type="email" class="form-control" placeholder="Your Email">
-              </div>
-              <div class="col-12 mb-3">
-                <input type="text" class="form-control" placeholder="Subject">
-              </div>
-              <div class="col-12 mb-3">
-                <textarea name="" id="" cols="30" rows="7" class="form-control" placeholder="Message"></textarea>
-              </div>
-
-              <div class="col-12">
-                <input type="submit" value="Send Message" class="btn btn-primary">
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
+      <iframe src="../user1.html" frameborder="0"></iframe>
 
       
     </div>
@@ -211,7 +168,7 @@
             <h3>Projects</h3>
             <ul class="list-unstyled float-left links">
               <li><a href="#">Web Design</a></li>
-              <li><a href="#">php5</a></li>
+              <li><a href="#">HTML5</a></li>
               <li><a href="#">CSS3</a></li>
               <li><a href="#">jQuery</a></li>
               <li><a href="#">Bootstrap</a></li>
@@ -282,4 +239,4 @@
 
   </body>
 
-  </php>
+  </html>

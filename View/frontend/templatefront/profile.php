@@ -4,8 +4,8 @@
 * Tempalte URI: https://untree.co/
 * License: https://creativecommons.org/licenses/by/3.0/
 */ -->
-<!doctype php>
-<php lang="en">
+<!doctype html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -34,19 +34,7 @@
 </head>
 
 <body>
-<?php
-session_start();
 
-// Vérifiez si l'utilisateur est connecté
-if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] != 1) {
-    // Rediriger vers la page de connexion si non connecté ou rôle incorrect
-    header('Location: ../../frontend/templatefront/index.php');
-    exit;
-}
-
-
-$pp= $_SESSION['user_id'];
-?>
   <div class="site-mobile-menu">
     <div class="site-mobile-menu-header">
       <div class="site-mobile-menu-close">
@@ -69,6 +57,16 @@ $pp= $_SESSION['user_id'];
             <a href="#" class="small mr-3"><span class="icon-envelope mr-2"></span> <span class="d-none d-lg-inline-block">info@mydomain.com</span></a> 
           </div>
 
+          <div class="col-6 col-lg-3 text-right">
+            <a href="login.html" class="small mr-3">
+              <span class="icon-lock"></span>
+              Log In
+            </a>
+            <a href="register.html" class="small">
+              <span class="icon-person"></span>
+              Register
+            </a>
+          </div>
 
         </div>
       </div>
@@ -76,17 +74,17 @@ $pp= $_SESSION['user_id'];
     <div class="sticky-nav js-sticky-header">
       <div class="container position-relative">
         <div class="site-navigation text-center">
-          <a href="index.php" class="logo menu-absolute m-0">Learner<span class="text-primary">.</span></a>
+          <a href="index.html" class="logo menu-absolute m-0">Learner<span class="text-primary">.</span></a>
 
           <ul class="js-clone-nav d-none d-lg-inline-block site-menu">
-            <li><a href="index.php">Home</a></li>
+            <li><a href="index.html">Home</a></li>
             
-            <li class="active"><a href="profile.php">Profile</a></li>
-            <li><a href="forum.php">Forum</a></li>
-            <li><a href="skillswap.php">SKILL SWAP</a></li>
-            <li><a href="blog.php">Blog</a></li>
-            <li><a href="quiz.php">Quiz</a></li>
-            <li><a href="reclamation.php">Reclamation</a></li>
+            <li class="active"><a href="profile.html">Profile</a></li>
+            <li><a href="forum.html">Forum</a></li>
+            <li><a href="skillswap.html">SKILL SWAP</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="quiz.html">Quiz</a></li>
+            <li><a href="reclamation.html">Reclamation</a></li>
           </ul>
 
           <a href="#" class="btn-book btn btn-secondary btn-sm menu-absolute">Enroll Now</a>
@@ -101,56 +99,18 @@ $pp= $_SESSION['user_id'];
   </nav>
   
 
-
-
-
-
-
-  <?php
-
-include $_SERVER['DOCUMENT_ROOT'] . '/PROJET WEB1/Model/modelUser.php';
-include $_SERVER['DOCUMENT_ROOT'] . '/PROJET WEB1/Controller/controllerUser.php';
-include $_SERVER['DOCUMENT_ROOT'] . '/PROJET WEB1/Controller/metierController.php';
-
-
-$userController = new CoursController();
-
-
-if ($pp> 0) {
-    $user = $userController->getUserByIdd($pp);
-} else {
-    $user = null;
-}
-?>
-
-
-
-
-  
-
   <div class="untree_co-hero overlay" style="background-image: url('images/img-school-3-min.jpg');">
     <div class="container">
       <div class="row align-items-center justify-content-center">
         <div class="col-12">
           <div class="row justify-content-center ">
             <div class="col-lg-6 text-center ">
-              <h1 class="mb-4 heading text-white" data-aos="fade-up" data-aos-delay="100">Profile</h1>
+              <h1 class="mb-4 heading text-white" data-aos="fade-up" data-aos-delay="100">School Staff</h1>
               <div class="mb-5 text-white desc mx-auto" data-aos="fade-up" data-aos-delay="200">
-           
-              <h3>Bienvenue, <strong style="color: red;"><?= htmlspecialchars($user['Utilisateur']); ?></strong></h3>
-
-
-          
-
-              <p>
-        Découvrez une communauté de passionnés prêts à échanger leurs savoirs. 
-        Apprenez de nouvelles compétences ou enseignez les vôtres, tout en élargissant votre réseau.
-    </p>
-             
-             
-             
+                <p>Another free template by <a href="https://untree.co/" target="_blank" class="link-highlight">Untree.co</a>. Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live.</p>
               </div>
-              <p class="mb-0" data-aos="fade-up" data-aos-delay="300"><a href="#" class="btn btn-secondary">Explore nos skills</a></p>
+
+              <p class="mb-0" data-aos="fade-up" data-aos-delay="300"><a href="#" class="btn btn-secondary">Explore courses</a></p>
 
             </div>
 
@@ -165,106 +125,56 @@ if ($pp> 0) {
   </div> <!-- /.untree_co-hero -->
 
   <div class="untree_co-section bg-light">
-
-
-
-
-
-
-
-
-
-
-
-
     <div class="container">
 
-
-    </div>
-
-
-
-
-
-    <!-- Contenu principal -->
-    <main class="main-content">
-       
-
-        <div class="content">
-            <div id="profile-content" class="section-content">
-                <h1>Profile</h1>
-
-
-                <?php
-                  
-                
-                if ($user): ?>
-                    <div class="profile-info">
-    <p><strong>Nom :</strong> <?= htmlspecialchars($user['Utilisateur']); ?></p>
-    <p><strong>Email :</strong> <?= htmlspecialchars($user['Email']); ?></p>
-    <p><strong>telephone :</strong> <?= htmlspecialchars($user['Telephone']); ?></p>
-    <p><strong>mot de passe :</strong> <?= htmlspecialchars($user['MotDePasse']); ?></p>
-          
-<?php else: ?>
-    <p>Utilisateur non trouvé ou ID invalide.</p>
-<?php endif; ?>
-
-
-                     <form method="GET" action="profileUpdate.php">
-                        <input type="hidden" value="<?= $user['Id']; ?>" name="id">
-                        <button class="btn-update" type="submit">Modifier</button>
-                    </form>
-
-</div>
-       <!-- Fin des Statistiques -->
-       </table>
-<button onclick="toggleForm()" class="chatbot-toggle-btn">
-    <span class="bot-icon">🤖</span> Parler avec Chatbot
-</button>
-<div id="chatbot-container" style="position: fixed; bottom: 10px; right: 10px; width: 300px; background: #f9f9f9; border: 1px solid #ccc; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-    <div id="chatbot-messages" style="height: 300px; overflow-y: auto; padding: 10px;">
-        <!-- Les messages apparaîtront ici -->
-    </div>
-    <form id="chatbot-form" style="display: flex; border-top: 1px solid #ccc;">
-        <input type="text" id="chatbot-input" placeholder="Posez une question..." style="flex: 1; padding: 10px; border: none; border-radius: 0;">
-        <button type="submit" style="background: #007BFF; color: white; border: none; padding: 10px 15px;">Envoyer</button>
-    </form>
-</div> 
-
-
-
+      <div class="row">
+        <div class="col-12 col-sm-6 col-md-6 mb-4 mb-lg-0 col-lg-4" data-aos="fade-up" data-aos-delay="0">
+          <div class="staff text-center">
+            <div class="mb-4"><img src="images/staff_1.jpg" alt="Image" class="img-fluid"></div>
+            <div class="staff-body">
+              <h3 class="staff-name">Mina Collins</h3>
+              <span class="d-block position mb-4">Teacher in Math</span>
+              <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+              <div class="social">
+                <a href="#" class="mx-2"><span class="icon-facebook"></span></a>
+                <a href="#" class="mx-2"><span class="icon-twitter"></span></a>
+                <a href="#" class="mx-2"><span class="icon-linkedin"></span></a>
+              </div>
             </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-6 mb-4 mb-lg-0 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+          <div class="staff text-center">
+            <div class="mb-4"><img src="images/staff_2.jpg" alt="Image" class="img-fluid"></div>
+            <div class="staff-body">
+              <h3 class="staff-name">Anderson Matthew</h3>
+              <span class="d-block position mb-4">Teacher in Music</span>
+              <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+              <div class="social">
+                <a href="#" class="mx-2"><span class="icon-facebook"></span></a>
+                <a href="#" class="mx-2"><span class="icon-twitter"></span></a>
+                <a href="#" class="mx-2"><span class="icon-linkedin"></span></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-6 mb-4 mb-lg-0 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+          <div class="staff text-center">
+            <div class="mb-4"><img src="images/staff_3.jpg" alt="Image" class="img-fluid"></div>
+            <div class="staff-body">
+              <h3 class="staff-name">Cynthia Misso</h3>
+              <span class="d-block position mb-4">Teacher English</span>
+              <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+              <div class="social">
+                <a href="#" class="mx-2"><span class="icon-facebook"></span></a>
+                <a href="#" class="mx-2"><span class="icon-twitter"></span></a>
+                <a href="#" class="mx-2"><span class="icon-linkedin"></span></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div> <!-- /.untree_co-section -->
 
   <div class="site-footer">
@@ -296,7 +206,7 @@ if ($pp> 0) {
             <h3>Projects</h3>
             <ul class="list-unstyled float-left links">
               <li><a href="#">Web Design</a></li>
-              <li><a href="#">php5</a></li>
+              <li><a href="#">HTML5</a></li>
               <li><a href="#">CSS3</a></li>
               <li><a href="#">jQuery</a></li>
               <li><a href="#">Bootstrap</a></li>
@@ -354,92 +264,6 @@ if ($pp> 0) {
       </div>
     </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-    <script>
-function toggleForm() {
-        const formContainer = document.getElementById('chatbot-container');
-        if (formContainer.style.display === 'none') {
-            formContainer.style.display = 'block';
-        } else {
-            formContainer.style.display = 'none';
-        }
-    }
-
-
-/********************************************************* */
-
-document.addEventListener('DOMContentLoaded', () => {
-        const chatForm = document.getElementById('chatbot-form');
-        const chatInput = document.getElementById('chatbot-input');
-        const chatMessages = document.getElementById('chatbot-messages');
-        chatForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    
-    const userMessage = chatInput.value.trim();
-    if (!userMessage) return;
-
-    // Ajouter le message utilisateur à l'interface
-    appendMessage('Vous', userMessage);
-
-    // Envoyer une requête AJAX au serveur
-    try {
-        const response = await fetch('chatbotHandler.php', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: new URLSearchParams({ message: userMessage })
-        });
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-
-        const data = await response.json();
-
-    
-        appendMessage('Chatbot', data.response);
-    } catch (error) {
-        console.error('Erreur:', error);
-        appendMessage('Erreur', "Une erreur est survenue. Veuillez réessayer.");
-    }
-
-    chatInput.value = '';
-});
-
-
-
-        function appendMessage(sender, message) {
-            const messageElement = document.createElement('div');
-            messageElement.classList.add('message');
-            messageElement.innerHTML = `<strong>${sender}:</strong> ${message}`;
-            chatMessages.appendChild(messageElement);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-        }
-    });
-
-</script>
     <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
@@ -453,4 +277,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
   </body>
 
-  </php>
+  </html>

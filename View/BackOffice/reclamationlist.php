@@ -4,9 +4,25 @@ require_once 'C:\xampp\htdocs\projet web\conf.php';
 
 // Create an instance of the controller
 $reclamationController = new ReclamationController();
+$userId = null;
 
 // Retrieve all reclamations
-$reclamations = $reclamationController->getAllReclamations();
+/*if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_user'])) {
+    $userId = (int) $_POST['id_user']; // Sanitize user input
+    $reclamations = $reclamationController->getReclamationsByUserId($userId); // Get reclamations by user ID
+}*/
+// Check for POST or GET
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_user'])) {
+    $userId = (int) $_POST['id_user'];
+} elseif (isset($_GET['id_user'])) {
+    $userId = (int) $_GET['id_user'];
+}
+
+// Fetch reclamations
+if ($userId !== null) {
+    $reclamations = $reclamationController->getReclamationsByUserId($userId);
+}
+
 
 ?>
 
@@ -20,27 +36,6 @@ $reclamations = $reclamationController->getAllReclamations();
 </head>
 <body>
     <h1>Reclamation List</h1>
-    <form action="allreponseslist.php" method="GET" style="display:inline;">
-                    
-        <button type="submit">see all awnsers</button>
-    </form>
-     <!-- Filter Form -->
-    <form action="filterreclamations.php" method="GET">
-        <label>
-            <input type="checkbox" name="status" value="Closed" id="closed-checkbox">
-            Closed
-        </label>
-        <label>
-            <input type="checkbox" name="status" value="Open" id="open-checkbox">
-            Open
-        </label>
-        <button type="submit">Display</button>
-    </form>
-    <form action="statistique.php" method="GET" style="display:inline;">
-                    
-        <button type="submit">stats</button>
-    </form>
-                
     <table>
     <thead>
     <tr>
@@ -63,23 +58,23 @@ $reclamations = $reclamationController->getAllReclamations();
                 <td><?= htmlspecialchars($reclamation['date']) ?></td>
                 <td>
                     <!-- Delete Button -->
-                    <form action="deletereclamationadmin.php" method="POST" style="display:inline;">
+                    <form action="deleteReclamation.php" method="POST" style="display:inline;">
                         <input type="hidden" name="id" value="<?= htmlspecialchars($reclamation['id']) ?>">
                         <button type="submit">Delete</button>
                     </form>
 
                     <!-- Update Button -->
-                    <form action="updatereclamationadmin.php" method="GET" style="display:inline;">
+                    <form action="updateReclamation.php" method="GET" style="display:inline;">
                         <input type="hidden" name="id" value="<?= htmlspecialchars($reclamation['id']) ?>">
                         <button type="submit">Update</button>
                     </form>
-                    <!-- awnser button-->
+                    <!-- 
                     <form action="awnser.php" method="GET" style="display:inline;">
                         <input type="hidden" name="id" value="<?= htmlspecialchars($reclamation['id']) ?>">
                         <button type="submit">awnser</button>
-                    </form>
+                    </form>-->
                     <!-- see awnser button-->
-                    <form action="affichereponseadmin.php" method="GET" style="display:inline;">
+                    <form action="affichereponse.php" method="GET" style="display:inline;">
                         <input type="hidden" name="id" value="<?= htmlspecialchars($reclamation['id']) ?>">
                         <button type="submit">see awnser</button>
                     </form>
@@ -95,7 +90,9 @@ $reclamations = $reclamationController->getAllReclamations();
         </tr>
     <?php endif; ?>
 </tbody>
-
+<form action="../frontend/user1.html" style="display:inline;">
+        <button type="submit">back to user form</button>
+    </form>
     </table>
 </body>
 </html>

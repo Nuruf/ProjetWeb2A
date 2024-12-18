@@ -58,11 +58,11 @@
           </div>
 
           <div class="col-6 col-lg-3 text-right">
-            <a href="login.php" class="small mr-3">
+            <a href="login.html" class="small mr-3">
               <span class="icon-lock"></span>
               Log In
             </a>
-            <a href="register.php" class="small">
+            <a href="register.html" class="small">
               <span class="icon-person"></span>
               Register
             </a>
@@ -76,7 +76,18 @@
         <div class="site-navigation text-center">
           <a href="index.php" class="logo menu-absolute m-0">SKILL SWAP<span class="text-primary">.</span></a>
 
-         
+          <ul class="js-clone-nav d-none d-lg-inline-block site-menu">
+            <li class="active"><a href="index.php">Home</a></li>
+            
+            </li>
+            <li ><a href="profile.php">Profile</a></li>
+            <li><a href="forum.php">Forum</a></li>
+            <li><a href="skillswap.php">SKILL SWAP</a></li>
+            <li><a href="blog.php">Blog</a></li>
+            <li><a href="quiz.php">Quiz</a></li>
+            <li><a href="reclamation.php">Reclamation</a></li>
+          </ul>
+
           <a href="#" class="btn-book btn btn-secondary btn-sm menu-absolute">Enroll Now</a>
 
           <a href="#" class="burger ml-auto float-right site-menu-toggle js-menu-toggle d-inline-block d-lg-none light" data-toggle="collapse" data-target="#main-navbar">
