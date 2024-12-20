@@ -1,0 +1,123 @@
+/* Reset styles */
+
+/* Login container */
+.login-container {
+    width: 100%;
+    max-width: 400px;
+    padding: 2rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.15);
+    text-align: center;
+
+    /* Ajouts pour gérer le défilement */
+    max-height: 80vh; /* Limite la hauteur à 80% de la hauteur de la fenêtre */
+    overflow-y: auto; /* Active le défilement vertical si nécessaire */
+    overflow-x: hidden;
+}
+
+h2 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+/* Logo style */
+#pp {
+    width: 100px;
+    height: auto;
+    margin: 10px auto;
+}
+
+/* Input groups */
+.input-group {
+    margin-bottom: 1.5rem;
+    text-align: left;
+    position: relative;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 1rem;
+    color: #333;
+}
+
+/* Styled input */
+.styled-input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    box-sizing: border-box;
+    border: 2px solid rgb(101, 154, 224);
+    border-radius: 5px;
+    background-color: #ffffff;
+    font-size: 16px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.styled-input:focus {
+    border-color: rgb(52, 105, 204);
+    box-shadow: 0 0 10px rgba(52, 105, 204, 0.5);
+    outline: none;
+}
+
+/* Login button */
+.login-btn {
+    width: 100%;
+    padding: 0.75rem;
+    border: none;
+    background-color: #4b6cb7;
+    color: white;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0px 6px 15px rgba(75, 108, 183, 0.4);
+}
+
+.login-btn:hover {
+    background-color: #3a519c;
+    box-shadow: 0px 8px 20px rgba(58, 81, 156, 0.6);
+}
+
+/* Extra options */
+.extra-options {
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+}
+
+.extra-options a {
+    color: #4b6cb7;
+    text-decoration: none;
+    margin: 0 0.5rem;
+    transition: color 0.3s;
+}
+
+.extra-options a:hover {
+    color: #3a519c;
+}
+
+/* Social icons */
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 1.5rem;
+}
+
+.social-icons .icon {
+    width: 30px;
+    height: auto;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 50%;
+    padding: 5px;
+    background-color: #f9f9f9;
+}
+
+.social-icons .icon:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
+}

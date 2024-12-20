@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulaire de Réclamation</title>
+    <style>
+        /* Global Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #a2c2e1, #f0f8ff); /* Gradient background */
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Form Styling */
+        form {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            width: 100%;
+            max-width: 500px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        form:hover {
+            transform: scale(1.02);
+        }
+
+        h1 {
+            text-align: center;
+            color: #007acc;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        /* Label Styling */
+        label {
+            font-weight: 600;
+            color: #005b99;
+            margin-bottom: 8px;
+            display: block;
+            font-size: 1rem;
+        }
+
+        /* Input & Textarea Styling */
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 12px;
+            margin-top: 8px;
+            border: 2px solid #b3d9ff;
+            border-radius: 8px;
+            font-size: 1rem;
+            background-color: #f9f9f9;
+            color: #333;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus, textarea:focus {
+            border-color: #007acc;
+            outline: none;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        /* Button Styling */
+        button {
+            background-color: #007acc;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #005b99;
+        }
+
+        button:active {
+            background-color: #003f66;
+        }
+
+        /* Responsive design */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+            form {
+                padding: 20px;
+                width: 90%;
+            }
+        }
+    </style>
+    <script src="validateForm.js"></script>
+</head>
+<body>
+    <form action="../backoffice/addreclamation.php" method="post" onsubmit="return validateForm(event)" id="reclamationForm">
+        <h1>Formulaire de Réclamation</h1>
+
+        <label for="user_id">ID utilisateur :</label>
+        <input type="text" id="user_id" name="user_id" >
+
+        <label for="description">Description :</label>
+        <textarea id="description" name="description" rows="4" placeholder="Entrez la description ici..." ></textarea>
+
+        <button type="submit">Envoyer</button>
+    </form>
+</body>
+</html>

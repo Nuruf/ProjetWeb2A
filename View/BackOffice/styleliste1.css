@@ -1,0 +1,76 @@
+
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #e6f2ff; /* Bleu clair en arrière-plan */
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.styled-table {
+    border-collapse: collapse; /* Évite les espaces entre les cellules */
+    margin: 90px auto; /* Centre le tableau et ajoute un espace en haut et en bas */
+    font-size: 18px; /* Taille de la police */
+    font-family: 'Arial', sans-serif;
+    width: 80%; /* Tableau qui prend toute la largeur disponible */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15); /* Effet d'ombre */
+}
+.add-quiz {
+    display: block; /* Assure que l'élément occupe toute la ligne */
+    text-align: center; /* Centre le texte */
+    margin: 20px 0; /* Ajoute de l'espace au-dessus et en dessous */
+    font-size: 18px; /* Facultatif : ajustez la taille de la police */
+    
+}
+
+
+/* Style pour les en-têtes */
+.styled-table thead tr {
+    background-color:  #3498db; /* Couleur d'arrière-plan des en-têtes */
+    color: #ffffff; /* Couleur du texte des en-têtes */
+    text-align: center; /* Alignement à gauche */
+}
+
+/* Bordures pour les cellules */
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px; /* Espacement interne des cellules */
+    border: 1px solid #dddddd; /* Bordures fines autour des cellules */
+}
+
+/* Alternance de couleurs pour les lignes */
+.styled-table tbody tr {
+    background-color: #f3f3f3; /* Couleur de fond des lignes impaires */
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f9f9f9; /* Couleur de fond des lignes paires */
+}
+
+/* Effet au survol */
+.styled-table tbody tr:hover {
+    background-color: #f1f1f1; /* Changement de couleur au survol */
+}
+
+/* Bordure inférieure pour chaque ligne */
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid  #3498db; /* Bordure pour la dernière ligne */
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+footer p {
+    margin: 5px 0;
+}
+
+      /* Navigation bar styles */
+    

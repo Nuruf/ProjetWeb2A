@@ -1,0 +1,111 @@
+        /* Global styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #e6f2ff; /* Bleu clair en arrière-plan */
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #007bff; /* Bleu vif */
+            color: white;
+            padding: 20px 40px;
+            text-align: center;
+            font-size: 28px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Navigation bar styles */
+        nav {
+            background-color: #0056b3; /* Bleu plus foncé */
+            padding: 15px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav ul li {
+            margin: 0 20px;
+        }
+
+        nav ul li a {
+            color: #ecf0f1;
+            text-decoration: none;
+            font-size: 18px;
+            padding: 12px 20px;
+            display: block;
+            border-radius: 4px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        nav ul li a:hover {
+            background-color: #004085; /* Bleu encore plus foncé */
+            transform: translateY(-2px);
+        }
+
+        /* Main content area */
+        .content {
+            flex-grow: 1;
+            padding: 30px;
+        }
+
+        /* Section titles */
+        .section-title {
+            font-size: 24px;
+            color: #0056b3; /* Bleu clair */
+            margin-bottom: 15px;
+        }
+
+        /* Section description text */
+        .section-description {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 40px;
+            color: #333;
+        }
+
+ /* User info */
+/* User info */
+.user-info {
+    background-color: #007bff; /* Bleu vif */
+    color: rgb(171, 190, 243);
+    padding: 15px 30px;
+    display: flex;
+    
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Image de profil */
+.user-info img {
+    width: 100px;
+    height: 100px;
+    border-radius: 10%;
+    margin-left: 20px; /* Espacement entre l'image et le nom */
+}
+
+/* Nom de l'utilisateur centré */
+.user-info span {
+    font-size: 18px;
+    font-weight: bold;
+    flex-grow: 1; /* Le texte occupe l'espace restant */
+    text-align: center; /* Centrer le texte */
+    margin-right: 200px;
+}
+
+/* Logo à droite */
+.user-info .logo {
+    width: 50px; /* Taille du logo */
+    height: 50px;
+}
