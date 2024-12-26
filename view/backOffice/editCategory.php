@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </aside>
 
     <div class="container mt-5">
-        <div id="skillSwapp-content" class="section-content">
+        <div >
             <h2 class="section-title">Update Category</h2>
             <p class="section-description">Please fill in the details below to update the category.</p>
 
